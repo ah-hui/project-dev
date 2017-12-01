@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SysUserRepository extends JpaRepository<SysUser, Long> {
 
-    SysUser findByLoginName(String loginName);
+    SysUser findByName(String name);
 
-    SysUser findByLoginNameOrPhone(String loginName, String phone);
+    SysUser findByNameOrNickName(String name, String nickName);
 }
