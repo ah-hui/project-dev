@@ -1,7 +1,7 @@
 package ind.lgh;
 
 import ind.lgh.system.domain.SysUser;
-import ind.lgh.system.service.SysUserRepository;
+import ind.lgh.system.repository.SysUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class SysUserRepositoryTests {
     public void test() {
         List<SysUser> list = userRepository.findAll();
         for (SysUser user: list) {
-            System.out.println(user.getName());
+            System.out.println(user.getLoginName());
         }
     }
 }
