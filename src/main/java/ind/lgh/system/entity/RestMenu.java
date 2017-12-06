@@ -34,8 +34,8 @@ public class RestMenu extends BaseEntity {
     /**
      * 资源地址
      */
-    @Column(name = "resources", length = 100)
-    private String resources;
+    @Column(name = "resource", length = 100)
+    private String resource;
 
     /**
      * 角色描述

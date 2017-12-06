@@ -3,43 +3,55 @@
 <head>
     <meta charset="UTF-8"/>
     <title>userList</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
 </head>
 <body class="container">
-<br/>
-<h1>用户列表</h1>
-<br/><br/>
-<div class="with:80%">
+
+<!-- 引入header - 通过tag名称引用 -->
+<header th:replace="common/header :: header"></header>
+<!-- 当前位置 -->
+<div class="current">用户列表</div>
+<!-- 内容 -->
+<div class="content">
     <table class="table table-hover">
         <thead>
         <tr>
             <th>#</th>
             <th>Login Name</th>
-            <th>Password</th>
             <th>Phone</th>
+            <th>Nick Name</th>
             <th>Email</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>操作</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-            <th scope="row" th:text="${user.id}">1</th>
+            <th scope="row" th:text="${user.id}"></th>
             <td th:text="${user.loginName}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.phone}">6</td>
-            <td th:text="${user.email}">6</td>
-            <td><a th:href="@{/user/toEdit(id=${user.id})}">edit</a></td>
-            <td><a th:href="@{/user/delete(id=${user.id})}">delete</a></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.nickName}"></td>
+            <td th:text="${user.email}"></td>
+            <td><a th:href="@{/user/toEdit(id=${user.id})}">编辑</a></td>
+            <td><a th:href="@{/user/(id=${user.id})}">冻结</a></td>
+            <td><a th:href="@{/user/(id=${user.id})}">关联角色</a></td>
+            <td><a th:href="@{/user/delete(id=${user.id})}">删除</a></td>
         </tr>
         </tbody>
     </table>
-</div>
-<div class="form-group">
-    <div class="col-sm-2 control-label">
-        <a href="/toAdd" th:href="@{/user/toAdd}" class="btn btn-info">add</a>
+
+    <div class="row">
+        <div class="col-sm-2 control-label">
+            <a href="/toAdd" th:href="@{/user/toAdd}" class="btn btn-info">add</a>
+        </div>
     </div>
 </div>
+
+<!-- 引入footer - 通过tag名称引用 -->
+<!--<header th:replace="common/footer :: footer"></header>-->
 
 </body>
 </html>

@@ -64,6 +64,7 @@ public class SysUserController extends BaseController {
         // set允许用户编辑的字段
         su.setLoginName(user.getLoginName());
         su.setPhone(user.getPhone());
+        su.setNickName(user.getNickName());
         su.setEmail(user.getEmail());
         // 保存，高并发下建议用saveAndFlush
         userRepository.saveAndFlush(su);
