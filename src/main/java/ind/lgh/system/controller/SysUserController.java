@@ -21,9 +21,14 @@ public class SysUserController extends BaseController {
     @Resource
     SysUserRepository userRepository;
 
+    @RequestMapping("")
+    public String index1() {
+        return "redirect:/user/list";
+    }
+
     @RequestMapping("/")
     public String index() {
-        return "redirect:/list";
+        return "redirect:/user/list";
     }
 
     @RequestMapping("/list")
@@ -40,8 +45,9 @@ public class SysUserController extends BaseController {
 
     @RequestMapping("/add")
     public String add(SysUser user) {
+        user.setHashedPassword(user.getPassword());
         userRepository.save(user);
-        return "redirect:/list";
+        return "redirect:/user/list";
     }
 
     @RequestMapping("/toEdit")
@@ -51,16 +57,23 @@ public class SysUserController extends BaseController {
         return "user/userEdit";
     }
 
+    // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
     @RequestMapping("/edit")
     public String edit(SysUser user){
-        userRepository.save(user);
-        return "redirect:/list";
+        SysUser su = userRepository.findOne(user.getId());
+        // set允许用户编辑的字段
+        su.setLoginName(user.getLoginName());
+        su.setPhone(user.getPhone());
+        su.setEmail(user.getEmail());
+        // 保存，高并发下建议用saveAndFlush
+        userRepository.saveAndFlush(su);
+        return "redirect:/user/list";
     }
 
     @RequestMapping("/delete")
     public String delete(Integer id){
         userRepository.delete(id);
-        return "redirect:/list";
+        return "redirect:/user/list";
     }
 
 }
