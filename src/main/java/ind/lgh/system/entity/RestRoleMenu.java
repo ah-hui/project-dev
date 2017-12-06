@@ -1,4 +1,4 @@
-package ind.lgh.system.domain;
+package ind.lgh.system.entity;
 
 import lombok.Getter;
 import lombok.Setter;

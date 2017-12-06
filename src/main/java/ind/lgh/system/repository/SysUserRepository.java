@@ -1,7 +1,6 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.domain.SysUser;
-import org.springframework.data.jpa.repository.JpaRepository;
+import ind.lgh.system.entity.SysUser;
 
 /**
  * @author lgh
