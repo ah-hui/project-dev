@@ -8,40 +8,37 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * 简单UserRoleMenu权限模型--角色
- * RESTful登录专用
+ * 简单UserRoleMenu权限模型--菜单（权限）
  *
  * @author lgh
  */
 @Getter
 @Setter
 @Entity
-@Table(name = "rest_role")
-public class RestRole extends BaseEntity {
+@Table(name = "simple_menu")
+public class SimpleMenu extends BaseEntity {
 
     /**
-     * 角色code
+     * 权限code
      */
-    @Column(name = "code", length = 30, nullable = false)
+    @Column(name = "code", nullable = false, length = 30)
     private String code;
 
     /**
-     * 角色名称
+     * 权限名称
      */
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     /**
-     * 是否有效
-     * true 有效,false 无效
+     * 资源地址
      */
-    @Column(name = "is_valid")
-    private Boolean isValid = true;
+    @Column(name = "resource", length = 100)
+    private String resource;
 
     /**
      * 角色描述
      */
     @Column(name = "description", length = 240)
     private String description;
-
 }

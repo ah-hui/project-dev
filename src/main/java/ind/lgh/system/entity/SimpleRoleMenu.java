@@ -9,15 +9,14 @@ import javax.persistence.Table;
 
 /**
  * 简单UserRoleMenu权限模型--菜单（角色权限中间表）
- * RESTful登录专用
  *
  * @author lgh
  */
 @Getter
 @Setter
 @Entity
-@Table(name = "rest_role_menu")
-public class RestRoleMenu extends BaseEntity {
+@Table(name = "simple_role_menu")
+public class SimpleRoleMenu extends BaseEntity {
 
     /**
      * 角色id

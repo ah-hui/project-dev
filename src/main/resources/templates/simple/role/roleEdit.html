@@ -13,7 +13,7 @@
 <div class="current">修改角色</div>
 <!-- 内容 -->
 <div class="content">
-    <form class="form-horizontal" th:action="@{/rest/role/edit}" th:object="${role}" method="post">
+    <form class="form-horizontal" th:action="@{/simple/role/edit}" th:object="${role}" method="post">
         <input type="hidden" name="id" th:value="*{id}"/>
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
@@ -42,7 +42,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" value="Submit" class="btn btn-info"/>
                 &nbsp; &nbsp; &nbsp;
-                <a href="/toAdd" th:href="@{/rest/role/list}" class="btn btn-info">Back</a>
+                <a href="/toAdd" th:href="@{/simple/role/list}" class="btn btn-info">Back</a>
             </div>
 
         </div>
