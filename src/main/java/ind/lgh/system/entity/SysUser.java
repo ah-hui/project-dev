@@ -72,11 +72,11 @@ public class SysUser extends BaseEntity {
     @Column(name = "email", unique = true, length = 120)
     private String email;
 
-//    /**
-//     * 角色
-//     */
-//    @Transient
-//    private Role role;
+    /**
+     * 角色
+     */
+    @Transient
+    private SimpleRole simpleRole;
 //
 //    /**
 //     * 权限

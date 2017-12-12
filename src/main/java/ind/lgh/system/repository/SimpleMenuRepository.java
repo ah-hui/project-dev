@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author lgh
  */
 public interface SimpleMenuRepository extends JpaRepository<SimpleMenu, Integer> {
+
+    SimpleMenu findById(Integer id);
 }
