@@ -1,6 +1,6 @@
 package ind.lgh.system.service;
 
-import ind.lgh.system.entity.SimpleMenu;
+import ind.lgh.system.domain.SimpleMenu;
 import ind.lgh.system.repository.SimpleMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

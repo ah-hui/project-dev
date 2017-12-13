@@ -1,6 +1,6 @@
 package ind.lgh.system.service;
 
-import ind.lgh.system.entity.SimpleRole;
+import ind.lgh.system.domain.SimpleRole;
 import ind.lgh.system.repository.SimpleRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

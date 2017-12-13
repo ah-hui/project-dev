@@ -1,6 +1,6 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.entity.SimpleUserRole;
+import ind.lgh.system.domain.SimpleUserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.entity.SimpleMenu;
+import ind.lgh.system.domain.SimpleMenu;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,6 +1,6 @@
 package ind.lgh.system.controller;
 
-import ind.lgh.system.entity.SimpleRole;
+import ind.lgh.system.domain.SimpleRole;
 import ind.lgh.system.service.SimpleRoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

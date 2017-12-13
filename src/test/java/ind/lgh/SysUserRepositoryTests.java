@@ -1,6 +1,6 @@
 package ind.lgh;
 
-import ind.lgh.system.entity.SysUser;
+import ind.lgh.system.domain.SysUser;
 import ind.lgh.system.repository.SysUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

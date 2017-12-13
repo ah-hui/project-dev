@@ -1,4 +1,4 @@
-package ind.lgh.system.entity;
+package ind.lgh.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

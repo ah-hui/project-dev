@@ -1,6 +1,6 @@
 package ind.lgh.system.controller;
 
-import ind.lgh.system.entity.SimpleMenu;
+import ind.lgh.system.domain.SimpleMenu;
 import ind.lgh.system.service.SimpleMenuService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

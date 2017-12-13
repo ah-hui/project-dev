@@ -1,6 +1,6 @@
 package ind.lgh.system.service;
 
-import ind.lgh.system.entity.SysUser;
+import ind.lgh.system.domain.SysUser;
 import ind.lgh.system.repository.SysUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.entity.SysUser;
+import ind.lgh.system.domain.SysUser;
 
 /**
  * 系统用户

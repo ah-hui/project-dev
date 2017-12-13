@@ -1,7 +1,7 @@
 package ind.lgh.system.controller;
 
-import ind.lgh.system.entity.SimpleUserRole;
-import ind.lgh.system.entity.SysUser;
+import ind.lgh.system.domain.SimpleUserRole;
+import ind.lgh.system.domain.SysUser;
 import ind.lgh.system.service.SimpleUserRoleService;
 import ind.lgh.system.service.SysUserService;
 import org.springframework.stereotype.Controller;

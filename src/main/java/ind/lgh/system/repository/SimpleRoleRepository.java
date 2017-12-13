@@ -1,6 +1,6 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.entity.SimpleRole;
+import ind.lgh.system.domain.SimpleRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
