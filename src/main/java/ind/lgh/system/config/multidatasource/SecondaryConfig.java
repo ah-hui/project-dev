@@ -18,16 +18,17 @@ import java.util.Map;
 
 /**
  * 次级数据源
+ * 1.主分支代码不使用多数据源，如果要测试，请打开下方全部注解
  *
  * @author lgh
  */
-@Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactorySecondary",
-        transactionManagerRef = "transactionManagerSecondary",
-        /* 设置Repository所在位置 */
-        basePackages = {"ind.lgh.business.repository"})
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories(
+//        entityManagerFactoryRef = "entityManagerFactorySecondary",
+//        transactionManagerRef = "transactionManagerSecondary",
+//        /* 设置Repository所在位置 */
+//        basePackages = {"ind.lgh.business.repository"})
 public class SecondaryConfig {
 
     @Autowired

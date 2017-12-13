@@ -19,16 +19,17 @@ import java.util.Map;
 
 /**
  * 主数据源
+ * 1.主分支代码不使用多数据源，如果要测试，请打开下方全部注解
  *
  * @author lgh
  */
-@Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactoryPrimary",
-        transactionManagerRef = "transactionManagerPrimary",
-        /* 设置Repository所在位置 */
-        basePackages = {"ind.lgh.system.repository"})
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories(
+//        entityManagerFactoryRef = "entityManagerFactoryPrimary",
+//        transactionManagerRef = "transactionManagerPrimary",
+//        /* 设置Repository所在位置 */
+//        basePackages = {"ind.lgh.system.repository"})
 public class PrimaryConfig {
 
     @Autowired
