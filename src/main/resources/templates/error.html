@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>统一异常处理</title>
+</head>
+<body>
+
+<h1>&nbsp;&nbsp;错误</h1>
+<div th:text="'异常信息: '+(${exception}?${exception.message}:'没有异常信息')"></div>
+<div th:text="'状态: '+${status}"></div>
+<div th:text="'URL: '+${url}"></div>
+
+</body>
+</html>

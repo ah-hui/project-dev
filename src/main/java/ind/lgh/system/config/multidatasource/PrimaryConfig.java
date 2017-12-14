@@ -61,6 +61,18 @@ public class PrimaryConfig {
         return jpaProperties.getHibernateProperties(dataSource);
     }
 
+    /**
+     * 如果要让函数通过@Transactional注解加入事务管理，需要指定下方配置的事务管理器
+     * 启用事务管理
+     * :@Transactional(value="transactionManagerPrimary")
+     * 指定事务隔离级别
+     * :@Transactional(isolation = Isolation.DEFAULT)
+     * 指定事务传播行为
+     * :@Transactional(propagation = Propagation.REQUIRED)
+     *
+     * @param builder
+     * @return
+     */
     @Primary
     @Bean(name = "transactionManagerPrimary")
     public PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {

@@ -12,4 +12,8 @@ Spring Boot的使用案例
 - 添加thymeleaf，编写user/role/menu的CRUD和前端页面
 - 添加RESTful风格编程示例（TestRestController和单元测试）
 - 添加基于JPA的多数据源支持（主分支代码不使用多数据源，如果要测试请打开相应配置的注解）
+- 添加Swagger2为RESTful API组织文档
+- 添加统一异常处理，并分开处理REST异常
+- 添加定时任务支持，测试请在主程序启用定时任务
+
 
