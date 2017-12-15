@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 全局异常处理类
+ * 处理全部从Controller抛出的异常
+ * 1.不处理thymeleaf模板异常
+ * 2.目前没有办法拦截1中所说的异常TemplateProcessingException，求指导。google有人提问但没有回答http://forum.thymeleaf.org/Thymeleaf-3-Exception-Handling-td4029725.html
  *
  * @author lgh
  */
@@ -28,7 +31,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
+        mav.addObject("gexception", e);
         mav.addObject("status", response.getStatus());
         mav.addObject("url", request.getRequestURI());
         mav.setViewName(DEFAULT_ERROR_VIEW);

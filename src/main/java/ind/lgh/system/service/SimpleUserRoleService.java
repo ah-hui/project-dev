@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 简单UserRoleUserRole权限模型--用户角色中间表
+ * user和role是多对多实现，但实际程序使用起来暂定为多对一
  *
  * @author lgh
  */
@@ -20,13 +21,9 @@ public class SimpleUserRoleService {
     @Autowired
     private SimpleUserRoleRepository simpleUserRoleRepository;
 
-    public SimpleUserRole findById(Integer id) {
-        return simpleUserRoleRepository.findById(id);
-    }
-
     public SimpleUserRole findByUserId(Integer userId) {
-        // 目前user和role的关系是一对一，但是考虑以后多对多关系，中间表将不能修改，只能新增
-        List<SimpleUserRole> list = simpleUserRoleRepository.findAllByUserId(userId);
+        // 暂定user和role的关系是多对一 - 实体类是多对多实现
+        List<SimpleUserRole> list = simpleUserRoleRepository.findByUserId(userId);
         if (list.size() == 0) {
             return null;
         }
@@ -43,14 +40,18 @@ public class SimpleUserRoleService {
         SimpleUserRole sur = new SimpleUserRole();
         sur.setUserId(simpleUserRole.getUserId());
         sur.setRoleId(simpleUserRole.getRoleId());
-        if(simpleUserRole.getId() != null){
-            delete(simpleUserRole.getId());
-        }
+        // 多对一在这里实现 - 先删除全部关联再保存当前关联
+        deleteByUserId(sur.getUserId());
         return simpleUserRoleRepository.saveAndFlush(sur);
     }
 
-    public void delete(Integer id){
-        simpleUserRoleRepository.delete(id);
+    /**
+     * 删除用户全部关联角色
+     *
+     * @param userId
+     */
+    public void deleteByUserId(Integer userId) {
+        simpleUserRoleRepository.deleteByUserId(userId);
     }
 
 }

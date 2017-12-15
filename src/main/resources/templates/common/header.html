@@ -15,9 +15,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="active"><a href="#">首页</a></li>
+                    <li><a th:href="@{/user/list}" th:onclick="'changeActive(this)'">用户管理</a></li>
+                    <li><a th:href="@{/simple/role/list}">角色管理</a></li>
+                    <li><a th:href="@{/simple/menu/list}">菜单管理</a></li>
                     <!--<li class="dropdown">-->
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>-->
                         <!--<ul class="dropdown-menu" role="menu">-->

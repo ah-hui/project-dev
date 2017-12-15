@@ -83,11 +83,4 @@ public class SysUserController extends BaseController {
         setAjaxMsg(response, true, "关联成功！");
     }
 
-    @RequestMapping("/findUserRoleByUserId")
-    @ResponseBody
-    public void findUserRoleByUserId(HttpServletResponse response, SimpleUserRole userRole) {
-        SimpleUserRole sur = simpleUserRoleService.findByUserId(userRole.getUserId());
-        setAjaxMsg(response, true, sur, "查询成功！");
-    }
-
 }

@@ -26,6 +26,7 @@
         <tr>
             <th>#</th>
             <th>Login Name</th>
+            <th>Role</th>
             <th>Phone</th>
             <th>Nick Name</th>
             <th>Email</th>
@@ -39,6 +40,22 @@
         <tr th:each="user : ${users}">
             <th scope="row" th:text="${user.id}"></th>
             <td th:text="${user.loginName}"></td>
+            <!-- th:if满足条件才显示标签 -->
+            <td th:text="${not #lists.isEmpty(user.roles)}?${user.roles[0].name}:''"></td>
+            <!--&lt;!&ndash; 文本内联 &ndash;&gt;-->
+            <!--<td th:each="role : ${user.roles}" th:inline="text">-->
+                <!--[[${role.name}]]-->
+            <!--</td>-->
+            <!--&lt;!&ndash; 脚本内联 &ndash;&gt;-->
+            <!--<script th:each="role,roleStat : ${user.roles}" th:inline="javascript">-->
+                <!--/*<![CDATA[*/-->
+                <!--var str = [[${roleStat.size}]];-->
+                <!--var index = [[${roleStat.index}]];-->
+                <!--if (index == 0) {-->
+                    <!--alert(str);-->
+                <!--}-->
+                <!--/*]]>*/-->
+            <!--</script>-->
             <td th:text="${user.phone}"></td>
             <td th:text="${user.nickName}"></td>
             <td th:text="${user.email}"></td>
@@ -75,7 +92,6 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <input id="userRoleId" type="hidden"/>
                     <input id="userId" type="hidden"/>
                     <div class="form-group">
                         <label for="userLoginName" class="col-sm-3 control-label">用户：</label>
@@ -182,41 +198,34 @@
     function showRoleModal(userId, userLoginName) {
         var roleSelect = $("#role")[0].selectize;
         roleSelect.clear();// 列表每行公用模态框，打开之前别忘记清空角色下拉框
-        $("#userRoleId").val("");// 隔离上一次打开模态框的影响
         $("#userId").val(userId);
         $("#userLoginName").text(userLoginName);
         $("#roleModal").modal("show");
-        $.ajax({
-            url: "findUserRoleByUserId",
-            type: "post",
-            dataType: "json",
-            data: {
-                userId: userId
-            },
-            success: function (json) {
-                if (json.data) {
-                    $("#userRoleId").val(json.data.id);
-                    roleSelect.setValue(json.data.roleId);
+        // 设置roleId下拉框
+        var users = [[${users}]];
+        var roleId;
+        for(var i=0; i<users.length; i++){
+            var user = users[i];
+            if(user.id == userId){
+                var roles = user.roles;
+                if(roles.length >0){
+                    roleId = roles[0].id;
+                    break;
                 }
-            },
-            error: function (e) {
-                // TODO: 统一错误处理
-                alert("错误！" + e);
             }
-        });
+        }
+        roleSelect.setValue(roleId);
     }
 
     function associateRole() {
         var roleSelect = $("#role")[0].selectize;
         var roleId = roleSelect.getValue();
         var userId = $("#userId").val();
-        var userRoleId = $("#userRoleId").val();
         $.ajax({
             url: "associateRole",
             type: "post",
             dataType: "json",
             data: {
-                id: userRoleId,
                 userId: userId,
                 roleId: roleId
             },
@@ -226,6 +235,7 @@
                 window.location.reload(true);
             },
             error: function (e) {
+                debugger
                 // TODO: 统一错误处理
                 alert("错误！" + e);
             }
@@ -234,5 +244,39 @@
 
 </script>
 
+<script th:inline="javascript">
+    $(function () {
+        // 初始化菜单
+//        initMenu();
+    });
+
+    function initMenu() {
+        $.ajax({
+            url: "../simple/role/listNameIsLike",
+            type: "post",
+            dataType: "json",
+            data: {
+                name: query
+            },
+            success: function (data) {
+
+            },
+            error: function (e) {
+                alert("错误！" + e);
+            }
+        });
+    }
+
+    function changeActive(obj) {
+        var currentA = $(obj);
+        var currentLi = currentA.parent();
+        if (currentLi.hasClass("active")) {
+            return;
+        }
+        var parentUl = currentLi.parent();
+        parentUl.children("li[class='active']").removeClass("active");
+        currentLi.addClass("active");
+    }
+</script>
 </body>
 </html>

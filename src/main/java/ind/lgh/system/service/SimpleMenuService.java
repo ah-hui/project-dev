@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,12 +37,20 @@ public class SimpleMenuService {
     public SimpleMenu save(SimpleMenu simpleMenu){
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SimpleMenu sm = findById(simpleMenu.getId());
-        // set允许用户编辑的字段
-        sm.setCode(simpleMenu.getCode());
-        sm.setName(simpleMenu.getName());
-        sm.setDescription(simpleMenu.getDescription());
+        // 修改
+        if(sm != null){
+            // set允许用户编辑的字段
+            sm.setCode(simpleMenu.getCode());
+            sm.setName(simpleMenu.getName());
+            sm.setDescription(simpleMenu.getDescription());
+            // 保存，高并发下建议用saveAndFlush
+            return simpleMenuRepository.saveAndFlush(sm);
+        }
+        // 新增
+        simpleMenu.setDateCreated(new Date());
+        simpleMenu.setLastUpdated(new Date());
         // 保存，高并发下建议用saveAndFlush
-        return simpleMenuRepository.saveAndFlush(sm);
+        return simpleMenuRepository.saveAndFlush(simpleMenu);
     }
 
     public void delete(Integer id){

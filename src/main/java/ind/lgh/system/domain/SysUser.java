@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * 系统用户
@@ -74,14 +75,13 @@ public class SysUser extends BaseEntity {
 
     /**
      * 角色
+     * 1.多对多关系
+     * 2.级联：主控表信息改变时改变关联表-本例所有情况不进行级联操作 by default
      */
-    @Transient
-    private SimpleRole simpleRole;
-//
-//    /**
-//     * 权限
-//     */
-//    @Transient
-//    private List<Menu> menus;
+    @ManyToMany(cascade = {}, fetch = FetchType.EAGER)
+    @JoinTable(name = "SIMPLE_USER_ROLE", joinColumns = {
+            @JoinColumn(name = "USER_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+            @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private Set<SimpleRole> roles;
 
 }

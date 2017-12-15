@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,12 +42,20 @@ public class SimpleRoleService {
     public SimpleRole save(SimpleRole simpleRole) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SimpleRole sr = findById(simpleRole.getId());
-        // set允许用户编辑的字段
-        sr.setCode(simpleRole.getCode());
-        sr.setName(simpleRole.getName());
-        sr.setDescription(simpleRole.getDescription());
+        // 修改
+        if(sr != null){
+            // set允许用户编辑的字段
+            sr.setCode(simpleRole.getCode());
+            sr.setName(simpleRole.getName());
+            sr.setDescription(simpleRole.getDescription());
+            // 保存，高并发下建议用saveAndFlush
+            return simpleRoleRepository.saveAndFlush(sr);
+        }
+        // 新增
+        simpleRole.setDateCreated(new Date());
+        simpleRole.setLastUpdated(new Date());
         // 保存，高并发下建议用saveAndFlush
-        return simpleRoleRepository.saveAndFlush(sr);
+        return simpleRoleRepository.saveAndFlush(simpleRole);
     }
 
     public void delete(Integer id) {

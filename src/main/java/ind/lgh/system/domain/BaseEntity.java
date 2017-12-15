@@ -3,6 +3,7 @@ package ind.lgh.system.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -58,6 +59,7 @@ public class BaseEntity implements Serializable {
      * 创建时间
      * TODO：getter需不需要加工？
      */
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "date_created")
     private Date dateCreated;
 

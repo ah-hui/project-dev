@@ -12,7 +12,8 @@ import java.util.List;
  */
 public interface SimpleUserRoleRepository extends JpaRepository<SimpleUserRole, Integer> {
 
-    SimpleUserRole findById(Integer id);
+    List<SimpleUserRole> findByUserId(Integer userId);
 
-    List<SimpleUserRole> findAllByUserId(Integer userId);
+    void deleteByUserId(Integer userId);
+
 }
