@@ -31,3 +31,11 @@ header {
     position: fixed;
     /* 这三句设置宽度全屏 - end   */
 }
+
+.checkbox {
+    margin-left: -20px !important;
+}
+
+.checkbox-inline {
+    padding-top: 0px !important;
+}

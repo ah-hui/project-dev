@@ -21,24 +21,35 @@ public class SimpleMenuService {
     @Autowired
     private SimpleMenuRepository simpleMenuRepository;
 
-    public SimpleMenu findById(Integer id){
+    public SimpleMenu findById(Integer id) {
         return simpleMenuRepository.findById(id);
     }
 
-    public List<SimpleMenu> findAll(){
+    public List<SimpleMenu> findAll() {
         return simpleMenuRepository.findAll();
     }
 
     /**
+     * 查询角色对应的全部菜单
+     *
+     * @param roleId
+     * @return
+     */
+    public List<SimpleMenu> findByRoleId(Integer roleId) {
+        return simpleMenuRepository.findByRoleId(roleId);
+    }
+
+    /**
      * 新增和修改
+     *
      * @param simpleMenu
      * @return
      */
-    public SimpleMenu save(SimpleMenu simpleMenu){
+    public SimpleMenu save(SimpleMenu simpleMenu) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SimpleMenu sm = findById(simpleMenu.getId());
         // 修改
-        if(sm != null){
+        if (sm != null) {
             // set允许用户编辑的字段
             sm.setCode(simpleMenu.getCode());
             sm.setName(simpleMenu.getName());
@@ -53,7 +64,7 @@ public class SimpleMenuService {
         return simpleMenuRepository.saveAndFlush(simpleMenu);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         simpleMenuRepository.delete(id);
     }
 }

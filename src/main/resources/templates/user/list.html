@@ -37,8 +37,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <th scope="row" th:text="${user.id}"></th>
+        <tr th:each="user,userStat : ${users}">
+            <th scope="row" th:text="${userStat.index+1}"></th>
             <td th:text="${user.loginName}"></td>
             <!-- th:if满足条件才显示标签 -->
             <td th:text="${not #lists.isEmpty(user.roles)}?${user.roles[0].name}:''"></td>

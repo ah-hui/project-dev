@@ -1,6 +1,9 @@
 package ind.lgh.system.controller;
 
+import ind.lgh.system.domain.SimpleMenu;
 import ind.lgh.system.domain.SimpleRole;
+import ind.lgh.system.domain.SimpleRoleMenu;
+import ind.lgh.system.service.SimpleMenuService;
 import ind.lgh.system.service.SimpleRoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +26,9 @@ public class SimpleRoleController extends BaseController {
 
     @Resource
     SimpleRoleService simpleRoleService;
+
+    @Resource
+    SimpleMenuService simpleMenuService;
 
     @RequestMapping("")
     public String index1() {
@@ -54,12 +61,26 @@ public class SimpleRoleController extends BaseController {
     @RequestMapping("/toEdit")
     public String toEdit(Model model, Integer id) {
         SimpleRole role = simpleRoleService.findById(id);
+        // 查询全部菜单
+        List<SimpleMenu> allMenus = simpleMenuService.findAll();
+        // 角色对应菜单
+        List<SimpleMenu> menus = simpleMenuService.findByRoleId(id);
         model.addAttribute("role", role);
+        model.addAttribute("allMenus", allMenus);
+        model.addAttribute("menus", menus);
         return "/simple/role/roleEdit";
     }
 
     @RequestMapping("/edit")
-    public String edit(SimpleRole role) {
+    public String edit(SimpleRole role, Integer[] menus) {
+        List<SimpleRoleMenu> list = new ArrayList<>();
+        for (int i = 0; i < menus.length; i++) {
+            SimpleRoleMenu rm = new SimpleRoleMenu();
+            rm.setRoleId(role.getId());
+            rm.setMenuId(menus[i]);
+            list.add(rm);
+        }
+        role.setRoleMenus(list);
         simpleRoleService.save(role);
         return "redirect:/simple/role/list";
     }

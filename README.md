@@ -23,4 +23,3 @@ Spring Boot的使用案例
 - 多反思一下为什么抓着一个分支写 O_o
 - 整理user和role的多对多关系，使用注解实现。主要内容是JPA查询user时关联查询出对应的role
 
-

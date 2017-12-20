@@ -24,19 +24,19 @@
             <th>Code</th>
             <th>Resource</th>
             <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>操作</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="menu : ${menus}">
-            <th scope="row" th:text="${menu.id}"></th>
+        <tr th:each="menu,menuStat : ${menus}">
+            <th scope="row" th:text="${menuStat.index+1}"></th>
             <td th:text="${menu.name}"></td>
             <td th:text="${menu.code}"></td>
             <td th:text="${menu.resource}"></td>
             <td th:text="${menu.description}"></td>
-            <td><a th:href="@{/simple/menu/toEdit(id=${menu.id})}">edit</a></td>
-            <td><a th:href="@{/simple/menu/delete(id=${menu.id})}">delete</a></td>
+            <td><a th:href="@{/simple/menu/toEdit(id=${menu.id})}">编辑</a></td>
+            <td><a th:href="@{/simple/menu/delete(id=${menu.id})}">删除</a></td>
         </tr>
         </tbody>
     </table>

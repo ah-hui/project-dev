@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 /**
  * 系统用户
@@ -82,6 +82,6 @@ public class SysUser extends BaseEntity {
     @JoinTable(name = "SIMPLE_USER_ROLE", joinColumns = {
             @JoinColumn(name = "USER_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
             @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private Set<SimpleRole> roles;
+    private List<SimpleRole> roles;
 
 }

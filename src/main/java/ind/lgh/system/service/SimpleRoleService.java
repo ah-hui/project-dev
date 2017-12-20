@@ -1,6 +1,7 @@
 package ind.lgh.system.service;
 
 import ind.lgh.system.domain.SimpleRole;
+import ind.lgh.system.domain.SimpleRoleMenu;
 import ind.lgh.system.repository.SimpleRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class SimpleRoleService {
 
     @Autowired
     private SimpleRoleRepository simpleRoleRepository;
+
+    @Autowired
+    private SimpleRoleMenuService simpleRoleMenuService;
 
     public SimpleRole findById(Integer id) {
         return simpleRoleRepository.findById(id);
@@ -42,16 +46,22 @@ public class SimpleRoleService {
     public SimpleRole save(SimpleRole simpleRole) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SimpleRole sr = findById(simpleRole.getId());
-        // 修改
-        if(sr != null){
+        // 1.先保存菜单权限 - 先删除角色对应的全部菜单，再批量新增
+        simpleRoleMenuService.deleteByRoleId(simpleRole.getId());
+        List<SimpleRoleMenu> roleMenus = simpleRole.getRoleMenus();
+        for (SimpleRoleMenu roleMenu : roleMenus) {
+            simpleRoleMenuService.save(roleMenu);
+        }
+        // 2.1.role修改
+        if (sr != null) {
             // set允许用户编辑的字段
-            sr.setCode(simpleRole.getCode());
             sr.setName(simpleRole.getName());
+            sr.setCode(simpleRole.getCode());
             sr.setDescription(simpleRole.getDescription());
             // 保存，高并发下建议用saveAndFlush
             return simpleRoleRepository.saveAndFlush(sr);
         }
-        // 新增
+        // 2.2.role新增
         simpleRole.setDateCreated(new Date());
         simpleRole.setLastUpdated(new Date());
         // 保存，高并发下建议用saveAndFlush

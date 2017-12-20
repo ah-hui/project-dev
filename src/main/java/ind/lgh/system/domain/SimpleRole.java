@@ -3,11 +3,8 @@ package ind.lgh.system.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * 简单UserRoleMenu权限模型--角色
@@ -45,7 +42,7 @@ public class SimpleRole extends BaseEntity {
     @Column(name = "description", length = 240)
     private String description;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<SysUser> users;
+    @Transient
+    private List<SimpleRoleMenu> roleMenus;
 
 }

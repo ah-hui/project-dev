@@ -31,6 +31,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
         ModelAndView mav = new ModelAndView();
+        // 与无法处理的异常保持一致
+        mav.addObject("exception", e.getClass());
         mav.addObject("gexception", e);
         mav.addObject("status", response.getStatus());
         mav.addObject("url", request.getRequestURI());

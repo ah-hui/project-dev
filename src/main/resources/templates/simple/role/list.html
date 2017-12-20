@@ -23,18 +23,18 @@
             <th>Name</th>
             <th>Code</th>
             <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>操作</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="role : ${roles}">
-            <th scope="row" th:text="${role.id}"></th>
+        <tr th:each="role,roleStat : ${roles}">
+            <th scope="row" th:text="${roleStat.index+1}"></th>
             <td th:text="${role.name}"></td>
             <td th:text="${role.code}"></td>
             <td th:text="${role.description}"></td>
-            <td><a th:href="@{/simple/role/toEdit(id=${role.id})}">edit</a></td>
-            <td><a th:href="@{/simple/role/delete(id=${role.id})}">delete</a></td>
+            <td><a th:href="@{/simple/role/toEdit(id=${role.id})}">编辑</a></td>
+            <td><a th:href="@{/simple/role/delete(id=${role.id})}">删除</a></td>
         </tr>
         </tbody>
     </table>
