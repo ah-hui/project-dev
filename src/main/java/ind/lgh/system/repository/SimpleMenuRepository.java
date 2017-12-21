@@ -11,6 +11,7 @@ import java.util.List;
  * 简单UserRoleMenu权限模型--菜单
  *
  * @author lgh
+ * @since 2017-12-21
  */
 public interface SimpleMenuRepository extends JpaRepository<SimpleMenu, Integer> {
 

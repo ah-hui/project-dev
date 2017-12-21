@@ -14,6 +14,7 @@ import javax.persistence.*;
  * 2.第一条因素占比为80%，另外20%是想装比搞个高端的复合主键玩玩
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Getter
 @Setter

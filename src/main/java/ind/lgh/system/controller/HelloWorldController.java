@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
+ * hello world web测试
+ *
  * @author lgh
+ * @since 2017-12-21
  */
 @Controller
 public class HelloWorldController {

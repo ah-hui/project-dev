@@ -14,6 +14,7 @@ import java.io.Serializable;
  * 3.重写equals和hashCode方法
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Getter
 @Setter

@@ -23,6 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * http://localhost:8080/v2/api-docs
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Configuration
 @EnableSwagger2

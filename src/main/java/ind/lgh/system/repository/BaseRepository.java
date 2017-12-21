@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
  * JpaRepository： 继承PagingAndSortingRepository，实现一组JPA规范相关的方法
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @NoRepositoryBean
 public class BaseRepository {

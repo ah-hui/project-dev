@@ -12,6 +12,7 @@ import javax.persistence.Table;
  * 暂用作测试多数据源 - 消息
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Getter
 @Setter

@@ -5,6 +5,7 @@ package ind.lgh.system.exception;
  * 返回JSON数据
  *
  * @author lgh
+ * @since 2017-12-21
  */
 public class RestException extends Exception {
 

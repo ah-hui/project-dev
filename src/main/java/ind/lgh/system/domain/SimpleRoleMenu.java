@@ -10,6 +10,7 @@ import javax.persistence.*;
  * 简单UserRoleMenu权限模型--菜单（角色权限中间表）
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Getter
 @Setter

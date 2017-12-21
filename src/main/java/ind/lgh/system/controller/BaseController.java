@@ -13,15 +13,17 @@ import java.util.List;
 
 /**
  * 本系统中接口返回书写方式
- 保存 删除 修改 应该用 super.setAjaxMsg( response, true, "删除成功" );  这种方式。
- 详情查询应改使用：super.setFormJson( response, true, departmentVO, "成功" ); 这种方式。
- 列表展示应该用： super.setGridJson( response, byCondition.size(), byCondition );
- 分页展示应该用：super.setGridJson( response, byPage );
+ * 保存 删除 修改 应该用 super.setAjaxMsg( response, true, "删除成功" );  这种方式。
+ * 详情查询应改使用：super.setFormJson( response, true, departmentVO, "成功" ); 这种方式。
+ * 列表展示应该用： super.setGridJson( response, byCondition.size(), byCondition );
+ * 分页展示应该用：super.setGridJson( response, byPage );
+ *
  * @author lgh
+ * @since 2017-12-21
  */
 public class BaseController {
 
-    protected final Logger logger = LoggerFactory.getLogger( getClass() );
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * 返回Ajax提示信息 多用于增加、删除、修改时的操作提示
@@ -40,8 +42,9 @@ public class BaseController {
             e.printStackTrace();
         }
     }
+
     /**
-     *将实体类封装为json对象返回给前端
+     * 将实体类封装为json对象返回给前端
      *
      * @param response the response
      * @param boo      the boo
@@ -131,7 +134,7 @@ public class BaseController {
      * @return the string
      */
     public String getRootPath() {
-        return new File( BaseController.class.getClassLoader().getResource( "" ).getPath() + "/" ).getParentFile().getPath() + "/";
+        return new File(BaseController.class.getClassLoader().getResource("").getPath() + "/").getParentFile().getPath() + "/";
     }
 
 }

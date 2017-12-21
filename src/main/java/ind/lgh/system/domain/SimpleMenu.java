@@ -11,6 +11,7 @@ import javax.persistence.Table;
  * 简单UserRoleMenu权限模型--菜单（权限）
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Getter
 @Setter

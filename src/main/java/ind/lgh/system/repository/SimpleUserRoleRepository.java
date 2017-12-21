@@ -9,6 +9,7 @@ import java.util.List;
  * 简单UserRoleMenu权限模型--用户角色中间表
  *
  * @author lgh
+ * @since 2017-12-21
  */
 public interface SimpleUserRoleRepository extends JpaRepository<SimpleUserRole, Integer> {
 

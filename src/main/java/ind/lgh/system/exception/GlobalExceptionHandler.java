@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * 2.目前没有办法拦截1中所说的异常TemplateProcessingException，求指导。google有人提问但没有回答http://forum.thymeleaf.org/Thymeleaf-3-Exception-Handling-td4029725.html
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

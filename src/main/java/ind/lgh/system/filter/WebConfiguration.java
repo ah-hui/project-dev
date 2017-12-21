@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
+ * 过滤器测试 - 目前只过滤请求输出url
+ *
  * @author lgh
+ * @since 2017-12-21
  */
 @Configuration
 public class WebConfiguration {
@@ -24,7 +27,7 @@ public class WebConfiguration {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new MyFilter());
         registrationBean.addUrlPatterns("/*");
-        registrationBean.addInitParameter("parmName","parmValue");
+        registrationBean.addInitParameter("parmName", "parmValue");
         registrationBean.setName("MyFilter");
         registrationBean.setOrder(1);
         return registrationBean;

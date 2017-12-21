@@ -21,6 +21,7 @@ import java.util.concurrent.Future;
  * 所以异步调用方法不能时static修饰的
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Component
 public class AsyncTask {

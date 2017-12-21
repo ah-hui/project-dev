@@ -13,6 +13,7 @@ import java.util.List;
  * user和role是多对多实现，但实际程序使用起来暂定为多对一
  *
  * @author lgh
+ * @since 2017-12-21
  */
 @Service("simpleUserRoleService")
 @Transactional

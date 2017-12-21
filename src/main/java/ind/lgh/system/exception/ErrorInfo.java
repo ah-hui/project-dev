@@ -7,6 +7,7 @@ import lombok.Setter;
  * RestException返回的JSON
  *
  * @author lgh
+ * @since 2017-12-21
  */
 public class ErrorInfo<T> {
 
