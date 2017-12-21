@@ -20,10 +20,10 @@ public class FileUtil {
     // 水印规格
     private static final String FONT_FAMILY = "微软雅黑"; // 字体
     private static final int FONT_STYLE = Font.BOLD; // 字体加粗
-    private static final int FONT_SIZE = 14; // 字体大小
-    private static final float ALPHA = 0.2F; // 水印透明度
+    private static final int FONT_SIZE = 20; // 字体大小
+    private static final float ALPHA = 0.5F; // 水印透明度
     private static final int SPACING = 10; // 水印与图片边缘间距
-    private static final Color DEFAULT_COLOR = Color.gray; // 文字水印颜色
+    private static final Color DEFAULT_COLOR = Color.white; // 文字水印颜色
     private static final String DEFUALT_TEXT_WATERMARK = "北京象翌"; // 默认水印文字
     private static final String DEFUALT_LOGO_PATH = ""; // 默认图片水印路径,暂空
     private static final int LOGO_WIDTH = 100; // 图片水印大小
@@ -31,7 +31,8 @@ public class FileUtil {
 	
     public static void main(String[] args) throws IOException {
     	
-    	watermarkWithImage();
+//    	watermarkWithImage();
+        watermarkWithText();
         
     }
     
@@ -41,7 +42,7 @@ public class FileUtil {
     	 * getRGB()的最后一个参数：
     	 * scansize 是图像中相邻两行中具有相同行索引的像素的索引偏移值。如果这个值与要提取的区域的宽度相同，那么一行的第一个像素就会存储在数组中前一行最后一个像素后 面的索引位置。如果这个值大于提取区域的宽度，那么数组中，在一行最后和下一行开始之间就会有一些未使用的索引。
     	 */
-    	File srcFile = new File("E:\\tmp\\11.jpg");
+    	File srcFile = new File("E:\\tmp\\22.jpg");
     	File logoFile = new File("E:\\tmp\\TextWatermarked.jpg");
         String targetPath = "E:\\tmp\\WatermarkedImage.jpg";
         
@@ -87,7 +88,7 @@ public class FileUtil {
     	 * getRGB()的最后一个参数：
     	 * scansize 是图像中相邻两行中具有相同行索引的像素的索引偏移值。如果这个值与要提取的区域的宽度相同，那么一行的第一个像素就会存储在数组中前一行最后一个像素后 面的索引位置。如果这个值大于提取区域的宽度，那么数组中，在一行最后和下一行开始之间就会有一些未使用的索引。
     	 */
-    	File srcFile = new File("E:\\tmp\\11.jpg");
+    	File srcFile = new File("E:\\tmp\\22.png");
         String contents = DEFUALT_TEXT_WATERMARK;
         String targetPath = "E:\\tmp\\WatermarkedImage0000.jpg";
         

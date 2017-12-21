@@ -1,9 +1,8 @@
 package ind.lgh.system.repository;
 
 import ind.lgh.system.domain.SysUser;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 /**
  * 系统用户
@@ -11,7 +10,7 @@ import java.util.List;
  *
  * @author lgh
  */
-public interface SysUserRepository extends BaseRepository<SysUser, Integer> {
+public interface SysUserRepository extends JpaRepository<SysUser, Integer>, QueryDslPredicateExecutor<SysUser> {
 
     SysUser findByLoginName(String loginName);
 

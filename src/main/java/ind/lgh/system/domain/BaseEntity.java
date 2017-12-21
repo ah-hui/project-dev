@@ -45,8 +45,8 @@ public class BaseEntity implements Serializable {
      * boolean型由JPA自动映射为数据库的bit(1)
      */
     @JsonIgnore
-    @Column(name = "is_deleted")
-    private boolean isDeleted = false;
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     /**
      * 创建人

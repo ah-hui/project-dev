@@ -1,10 +1,9 @@
 package ind.lgh.system.repository;
 
-
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import java.io.Serializable;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * 基础数据访问层
@@ -18,5 +17,8 @@ import java.io.Serializable;
  * @author lgh
  */
 @NoRepositoryBean
-public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+public class BaseRepository {
+
+    @PersistenceContext
+    protected EntityManager entityManager;
 }
