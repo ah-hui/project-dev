@@ -4,11 +4,11 @@
 
 Spring Boot的使用案例
 
-#T00: 
+# T00: 
 仅保存项目spring-boot初始化状态
 
-#T01: 
-初始化仓库后添加基本基础设施和实体并完成user的CRUD（thymeleaf实现/前后端不分离）
+# T01: 
+初始化仓库后添加基础设施和实体（前端thymeleaf实现/前后端不分离）
 - 添加Spring-data-jpa/lombok/druid
 - 添加最简单的UserRoleMenu权限模型但尚未实现业务逻辑，SimpleRole系列
 - 添加thymeleaf，编写user/role/menu的CRUD和前端页面
@@ -24,3 +24,7 @@ Spring Boot的使用案例
 - 整理user和role的多对多关系，使用注解实现。主要内容是JPA查询user时关联查询出对应的role
 - 添加JavaMail发送邮件
 - 添加QueryDSL做复杂多表关联查询
+
+# T02:
+整合Apache Shiro加入登录认证和权限管理
+- 添加Shiro实现一套RBAC（Role-Based Access Control）

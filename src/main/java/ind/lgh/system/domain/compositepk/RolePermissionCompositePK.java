@@ -18,17 +18,17 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class RoleMenuCompositePK implements Serializable {
+public class RolePermissionCompositePK implements Serializable {
 
     private Integer roleId;
-    private Integer menuId;
+    private Integer permissionId;
 
-    public RoleMenuCompositePK() {
+    public RolePermissionCompositePK() {
     }
 
-    public RoleMenuCompositePK(Integer roleId, Integer menuId) {
+    public RolePermissionCompositePK(Integer roleId, Integer permissionId) {
         this.roleId = roleId;
-        this.menuId = menuId;
+        this.permissionId = permissionId;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class RoleMenuCompositePK implements Serializable {
          */
         // Integer的hashCode()方法返回本身
         result = 31 * result + ((roleId == null) ? 0 : roleId.hashCode());
-        result = 31 * result + ((menuId == null) ? 0 : menuId.hashCode());
+        result = 31 * result + ((permissionId == null) ? 0 : permissionId.hashCode());
         return result;
     }
 
@@ -56,7 +56,7 @@ public class RoleMenuCompositePK implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RoleMenuCompositePK other = (RoleMenuCompositePK) obj;
+        final RolePermissionCompositePK other = (RolePermissionCompositePK) obj;
         if (roleId == null) {
             if (other.roleId != null) {
                 return false;
@@ -64,11 +64,11 @@ public class RoleMenuCompositePK implements Serializable {
         } else if (!roleId.equals(other.roleId)) {
             return false;
         }
-        if (menuId == null) {
-            if (other.menuId != null) {
+        if (permissionId == null) {
+            if (other.permissionId != null) {
                 return false;
             }
-        } else if (!menuId.equals(other.menuId)) {
+        } else if (!permissionId.equals(other.permissionId)) {
             return false;
         }
         return true;

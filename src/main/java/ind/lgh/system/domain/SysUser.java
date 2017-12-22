@@ -1,6 +1,7 @@
 package ind.lgh.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ind.lgh.system.config.shiro.PasswordManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -79,10 +80,20 @@ public class SysUser extends BaseEntity {
      * 1.多对多关系
      * 2.级联：主控表信息改变时改变关联表-本例所有情况不进行级联操作 by default
      */
-    @ManyToMany(cascade = {}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "SIMPLE_USER_ROLE", joinColumns = {
             @JoinColumn(name = "USER_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
             @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<SimpleRole> roles;
+
+    /**
+     * 密码盐.
+     * 加盐后如果明文密码一样，由于盐不一样，密文就不一样
+     *
+     * @return
+     */
+    public String getCredentialsSalt() {
+        return this.loginName + PasswordManager.getRawSalt();
+    }
 
 }

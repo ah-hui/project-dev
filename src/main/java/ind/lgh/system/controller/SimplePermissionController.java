@@ -1,7 +1,7 @@
 package ind.lgh.system.controller;
 
-import ind.lgh.system.domain.SimpleMenu;
-import ind.lgh.system.service.SimpleMenuService;
+import ind.lgh.system.domain.SimplePermission;
+import ind.lgh.system.service.SimplePermissionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +17,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/simple/menu")
-public class SimpleMenuController extends BaseController {
+public class SimplePermissionController extends BaseController {
 
     @Resource
-    SimpleMenuService simpleMenuService;
+    SimplePermissionService simplePermissionService;
 
     @RequestMapping("")
     public String index1() {
@@ -34,8 +34,8 @@ public class SimpleMenuController extends BaseController {
 
     @RequestMapping("/list")
     public String list(Model model) {
-        List<SimpleMenu> menus = simpleMenuService.findAll();
-        model.addAttribute("menus", menus);
+//        List<SimplePermission> menus = simplePermissionService.findAll();
+//        model.addAttribute("menus", menus);
         return "/simple/menu/list";
     }
 
@@ -45,27 +45,27 @@ public class SimpleMenuController extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(SimpleMenu menu) {
-        simpleMenuService.save(menu);
+    public String add(SimplePermission menu) {
+//        simplePermissionService.save(menu);
         return "redirect:/simple/menu/list";
     }
 
     @RequestMapping("/toEdit")
     public String toEdit(Model model, Integer id) {
-        SimpleMenu menu = simpleMenuService.findById(id);
-        model.addAttribute("menu", menu);
+//        SimplePermission menu = simplePermissionService.findById(id);
+//        model.addAttribute("menu", menu);
         return "/simple/menu/menuEdit";
     }
 
     @RequestMapping("/edit")
-    public String edit(SimpleMenu menu) {
-        simpleMenuService.save(menu);
+    public String edit(SimplePermission menu) {
+//        simplePermissionService.save(menu);
         return "redirect:/simple/menu/list";
     }
 
     @RequestMapping("/delete")
     public String delete(Integer id) {
-        simpleMenuService.delete(id);
+//        simplePermissionService.delete(id);
         return "redirect:/simple/menu/list";
     }
 }

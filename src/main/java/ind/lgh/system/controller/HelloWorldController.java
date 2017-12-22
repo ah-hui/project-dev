@@ -43,8 +43,8 @@ public class HelloWorldController {
         throw new RestException("异常测试-rest1异常！");
     }
 
-    @RequestMapping("/")
-    public String index() {
-        return "redirect:/hello";
-    }
+//    @RequestMapping("/")
+//    public String index() {
+//        return "redirect:/hello";
+//    }
 }

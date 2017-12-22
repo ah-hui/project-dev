@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 /**
- * 简单UserRoleMenu权限模型--菜单（用户角色中间表）
+ * RBAC模型--用户角色中间表
  *
  * 为什么使用复合主键?
  * 1.hibernate注解实现多对多关系时，默认会将中间表的主键设置为两关联字段的复合主键 --- 并且会忽略掉@Id和@GeneratedValue直接对关联主表对应字段(userId)自增 --- 进而导致本类的id字段无法自增要蛋疼自己设置
