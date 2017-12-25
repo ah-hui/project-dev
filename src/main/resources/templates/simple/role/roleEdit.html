@@ -21,7 +21,7 @@
 <div class="content">
     <form class="form-horizontal" th:action="@{/simple/role/edit}" th:object="${role}" method="post">
         <input type="hidden" name="id" th:value="*{id}"/>
-        <input type="hidden" name="menus" id="menus"/>
+        <input type="hidden" name="permissions" id="permissions"/>
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-4">
@@ -42,9 +42,17 @@
                        placeholder="Description"/>
             </div>
         </div>
+        <!--<div class="form-group">-->
+        <!--<label for="valid" class="col-sm-2 control-label">Valid</label>-->
+        <!--<div class="col-sm-4 checkbox">-->
+        <!--<label class="checkbox-inline">-->
+        <!--<input type='checkbox' id="valid" name="valid" th:value="*{valid}" checked>-->
+        <!--</label>-->
+        <!--</div>-->
+        <!--</div>-->
         <div class="form-group">
-            <label for="description" class="col-sm-2 control-label">Menu</label>
-            <div id="allMenus" class="checkbox col-sm-10">
+            <label for="allPermissions" class="col-sm-2 control-label">Permission</label>
+            <div id="allPermissions" class="checkbox col-sm-10">
                 <label class="checkbox-inline">
 
                 </label>
@@ -62,45 +70,50 @@
 </div>
 
 <script th:inline="javascript">
-    var menuIds = new Set();
+    var permissionIds = new Set();
     $(function () {
-        var allMenus = [[${allMenus}]];
-        var menus = [[${menus}]];
+        var allPermissions = [[${allPermissions}]];
+        var permissions = [[${role.permissions}]];
         var html = "";
         // 初始化菜单checkbox
-        allMenus.forEach(function (e) {
-            html += "<label class='checkbox-inline'><input type='checkbox' id='menu" + e.id + "' value='" + e.id + "'>&nbsp;" + e.name + "</label>";
+        allPermissions.forEach(function (e) {
+            html += "<label class='checkbox-inline'><input type='checkbox' id='permission" + e.id + "' value='" + e.id + "'>&nbsp;" + e.name + "</label>";
         });
-        $("#allMenus").html(html);
+        $("#allPermissions").html(html);
         // 激活iCheck
-        $("input[id^='menu']:checkbox").iCheck({
+        $("input[id='valid']:checkbox").iCheck({
             checkboxClass: 'icheckbox_minimal-blue',
             radioClass: 'iradio_minimal-blue',
             increaseArea: '20%' // optional
         });
-        // 绑定click事件
-        $("input[id^='menu']:checkbox").on('ifClicked', function (event) {
-            var id = $(this).val();
-            if ($(this).is(":checked")) {
-                if (menuIds.has(id)) {
-                    menuIds.delete(id);
-                }
-            } else {
-                menuIds.add(id);
-            }
-            $(this).iCheck('toggle');
-            $("#menus").val(Array.from(menuIds).toString());
+        $("input[id^='permission']:checkbox").iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass: 'iradio_minimal-blue',
+            increaseArea: '20%' // optional
         });
         // 设置选中状态
-        debugger
-        menus.forEach(function (e) {
+        permissions.forEach(function (e) {
             if (e && e.id != null) {
-                menuIds.add(e.id);
-                var checkbox = $("#menu" + e.id);
+                permissionIds.add(e.id + "");
+                var checkbox = $("#permission" + e.id);
                 if (checkbox) {
                     checkbox.iCheck("check");
                 }
             }
+        });
+        // 绑定click事件
+        $("input[id^='permission']:checkbox").on('ifClicked', function (event) {
+            var id = $(this).val();
+            if ($(this).is(":checked")) {
+                if (permissionIds.has(id + "")) {
+                    permissionIds.delete(id);
+                    console.log("delete:" + id);
+                }
+            } else {
+                permissionIds.add(id + "");
+            }
+            $(this).iCheck('toggle');
+            $("#permissions").val(Array.from(permissionIds).toString());
         });
     });
 </script>

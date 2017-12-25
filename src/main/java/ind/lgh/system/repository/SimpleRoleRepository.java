@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface SimpleRoleRepository extends JpaRepository<SimpleRole, Integer>, JpaSpecificationExecutor<SimpleRole> {
 
+    SimpleRole findById(Integer id);
+
 }

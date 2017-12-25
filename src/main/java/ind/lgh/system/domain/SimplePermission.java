@@ -35,9 +35,9 @@ public class SimplePermission extends BaseEntity {
 
     /**
      * 资源类型
-     * [menu|button]
+     * [permission|button]
      */
-    @Column(name = "resource_type", columnDefinition = "enum('menu','button')")
+    @Column(name = "resource_type", columnDefinition = "enum('permission','button')")
     private String resourceType;
 
     /**

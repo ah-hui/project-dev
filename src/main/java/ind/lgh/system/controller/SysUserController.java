@@ -8,6 +8,7 @@ import ind.lgh.system.service.SysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,8 +29,8 @@ public class SysUserController extends BaseController {
     @Resource
     SysUserService sysUserService;
 
-//    @Resource
-//    SimpleUserRoleService simpleUserRoleService;
+    @Resource
+    SimpleUserRoleService simpleUserRoleService;
 
     @RequestMapping("")
     public String index1() {
@@ -57,7 +58,7 @@ public class SysUserController extends BaseController {
     @RequestMapping("/add")
     @RequiresPermissions("user:create")
     public String add(SysUser user) {
-        user.setHashedPassword(PasswordManager.encode(user.getPassword(),user.getLoginName()));
+        user.setHashedPassword(PasswordManager.encode(user.getPassword(), user.getLoginName()));
         sysUserService.save(user);
         return "redirect:/user/list";
     }
@@ -83,10 +84,19 @@ public class SysUserController extends BaseController {
         return "redirect:/user/list";
     }
 
+    /**
+     * 前台传递的参数是list时，需用@RequestBody解析
+     * 另外，前台ajax必须包含：
+     * contentType:"application/json;charset=UTF-8",
+     * data: JSON.stringify(arr),
+     *
+     * @param response
+     * @param list
+     */
     @RequestMapping("/associateRole")
     @ResponseBody
-    public void associateRole(HttpServletResponse response, SimpleUserRole userRole) {
-//        simpleUserRoleService.save(userRole);
+    public void associateRole(HttpServletResponse response, @RequestBody List<SimpleUserRole> list) {
+        simpleUserRoleService.batchUpdate(list);
         setAjaxMsg(response, true, "关联成功！");
     }
 

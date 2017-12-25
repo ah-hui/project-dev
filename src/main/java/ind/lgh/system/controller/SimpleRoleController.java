@@ -2,6 +2,7 @@ package ind.lgh.system.controller;
 
 import ind.lgh.system.domain.SimplePermission;
 import ind.lgh.system.domain.SimpleRole;
+import ind.lgh.system.domain.SimpleRolePermission;
 import ind.lgh.system.service.SimplePermissionService;
 import ind.lgh.system.service.SimpleRoleService;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 简单UserRoleMenu权限模型--角色
+ * 简单UserRolePermission权限模型--角色
  *
  * @author lgh
  * @since 2017-12-21
@@ -24,8 +25,8 @@ import java.util.List;
 @RequestMapping("/simple/role")
 public class SimpleRoleController extends BaseController {
 
-//    @Resource
-//    SimpleRoleService simpleRoleService;
+    @Resource
+    SimpleRoleService simpleRoleService;
 
     @Resource
     SimplePermissionService simplePermissionService;
@@ -42,8 +43,8 @@ public class SimpleRoleController extends BaseController {
 
     @RequestMapping("/list")
     public String list(Model model) {
-//        List<SimpleRole> roles = simpleRoleService.findAll();
-//        model.addAttribute("roles", roles);
+        List<SimpleRole> roles = simpleRoleService.findAll();
+        model.addAttribute("roles", roles);
         return "/simple/role/list";
     }
 
@@ -54,55 +55,45 @@ public class SimpleRoleController extends BaseController {
 
     @RequestMapping("/add")
     public String add(SimpleRole role) {
-//        simpleRoleService.save(role);
+        simpleRoleService.save(role);
         return "redirect:/simple/role/list";
     }
 
     @RequestMapping("/toEdit")
     public String toEdit(Model model, Integer id) {
-//        SimpleRole role = simpleRoleService.findById(id);
-//        // 查询全部菜单
-//        List<SimplePermission> allMenus = simplePermissionService.findAll();
-//        // 角色对应菜单
-//        List<SimplePermission> menus = simplePermissionService.findByRoleId(id);
-//        model.addAttribute("role", role);
-//        model.addAttribute("allMenus", allMenus);
-//        model.addAttribute("menus", menus);
+        SimpleRole role = simpleRoleService.findById(id);
+        // 查询全部菜单
+        List<SimplePermission> allPermissions = simplePermissionService.findAll();
+        model.addAttribute("role", role);
+        model.addAttribute("allPermissions", allPermissions);
         return "/simple/role/roleEdit";
     }
 
     @RequestMapping("/edit")
-    public String edit(SimpleRole role, Integer[] menus) {
-//        List<SimpleRoleMenu> list = new ArrayList<>();
-//        for (int i = 0; i < menus.length; i++) {
-//            SimpleRoleMenu rm = new SimpleRoleMenu();
-//            rm.setRoleId(role.getId());
-//            rm.setMenuId(menus[i]);
-//            list.add(rm);
-//        }
-//        role.setRoleMenus(list);
-//        simpleRoleService.save(role);
+    public String edit(SimpleRole role, Integer[] permissions) {
+        List<SimpleRolePermission> list = new ArrayList<>();
+        for (int i = 0; i < permissions.length; i++) {
+            SimpleRolePermission rm = new SimpleRolePermission();
+            rm.setRoleId(role.getId());
+            rm.setPermissionId(permissions[i]);
+            list.add(rm);
+        }
+        role.setRolePermissions(list);
+        simpleRoleService.save(role);
         return "redirect:/simple/role/list";
     }
 
     @RequestMapping("/delete")
     public String delete(Integer id) {
-//        simpleRoleService.delete(id);
+        simpleRoleService.delete(id);
         return "redirect:/simple/role/list";
     }
 
-//    @RequestMapping(value = "/listAll", method = RequestMethod.POST)
-//    @ResponseBody
-//    public List<SimpleRole> listAll() {
-//        List<SimpleRole> roles = simpleRoleService.findAll();
-//        return roles;
-//    }
-
-//    @RequestMapping(value = "/listNameIsLike", method = RequestMethod.POST)
-//    @ResponseBody
-//    public List<SimpleRole> listNameIsLike(String name) {
-//        List<SimpleRole> roles = simpleRoleService.findByNameIsLike(name + "%");
-//        return roles;
-//    }
+    @RequestMapping(value = "/listAll", method = RequestMethod.POST)
+    @ResponseBody
+    public List<SimpleRole> listAll() {
+        List<SimpleRole> roles = simpleRoleService.findAll();
+        return roles;
+    }
 
 }

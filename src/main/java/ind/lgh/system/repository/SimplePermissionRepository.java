@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SimplePermissionRepository extends JpaRepository<SimplePermission, Integer> {
 
+    SimplePermission findById(Integer id);
 }

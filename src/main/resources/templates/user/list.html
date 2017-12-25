@@ -44,17 +44,17 @@
             <td th:text="${not #lists.isEmpty(user.roles)}?${user.roles[0].name}:''"></td>
             <!--&lt;!&ndash; 文本内联 &ndash;&gt;-->
             <!--<td th:each="role : ${user.roles}" th:inline="text">-->
-                <!--[[${role.name}]]-->
+            <!--[[${role.name}]]-->
             <!--</td>-->
             <!--&lt;!&ndash; 脚本内联 &ndash;&gt;-->
             <!--<script th:each="role,roleStat : ${user.roles}" th:inline="javascript">-->
-                <!--/*<![CDATA[*/-->
-                <!--var str = [[${roleStat.size}]];-->
-                <!--var index = [[${roleStat.index}]];-->
-                <!--if (index == 0) {-->
-                    <!--alert(str);-->
-                <!--}-->
-                <!--/*]]>*/-->
+            <!--/*<![CDATA[*/-->
+            <!--var str = [[${roleStat.size}]];-->
+            <!--var index = [[${roleStat.index}]];-->
+            <!--if (index == 0) {-->
+            <!--alert(str);-->
+            <!--}-->
+            <!--/*]]>*/-->
             <!--</script>-->
             <td th:text="${user.phone}"></td>
             <td th:text="${user.nickName}"></td>
@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label for="role" class="col-sm-3 control-label">选择角色：</label>
                         <div class="col-sm-8">
-                            <select id="role" class="selectize-control" placeholder="选择一个...">
+                            <select id="role" multiple class="selectize-control" placeholder="选择一个...">
                             </select>
                         </div>
                     </div>
@@ -131,6 +131,7 @@
      * 和API文档：https://github.com/selectize/selectize.js/blob/master/docs/api.md
      */
     $('#role').selectize({
+        maxItems: null,// The max number of items the user can select. null allows an unlimited number of items.
         valueField: "id",// The name of the property to use as the value when an item is selected.
         labelField: "name",// The name of the property to render as an option / item label (not needed when custom rendering functions are defined).
         searchField: "name",// An array of property names to analyze when filtering options.
@@ -147,7 +148,7 @@
         },
         */
         create: false,// Allows the !user! to create new items that aren't in the initial list of options.
-        dropdownParent: null// The element the dropdown menu is appended to. This should be 'body' or null. If null, the dropdown will be appended as a child of the Selectize control.
+        dropdownParent: null// The element the dropdown permission is appended to. This should be 'body' or null. If null, the dropdown will be appended as a child of the Selectize control.
     });
 
     // autocomplete示例
@@ -203,32 +204,36 @@
         $("#roleModal").modal("show");
         // 设置roleId下拉框
         var users = [[${users}]];
-        var roleId;
-        for(var i=0; i<users.length; i++){
+        var roleIds = [];
+        for (var i = 0; i < users.length; i++) {
             var user = users[i];
-            if(user.id == userId){
+            if (user.id == userId) {
                 var roles = user.roles;
-                if(roles.length >0){
-                    roleId = roles[0].id;
+                if (roles.length > 0) {
+                    for (var j = 0; j < roles.length; j++) {
+                        roleIds.push(roles[j].id);
+                    }
                     break;
                 }
             }
         }
-        roleSelect.setValue(roleId);
+        roleSelect.setValue(roleIds);
     }
 
     function associateRole() {
         var roleSelect = $("#role")[0].selectize;
-        var roleId = roleSelect.getValue();
+        var roleIds = roleSelect.getValue(); // 数组
         var userId = $("#userId").val();
+        var arr = [];
+        roleIds.forEach(function (e) {
+            arr.push({"userId": userId, "roleId": e});
+        });
         $.ajax({
             url: "associateRole",
             type: "post",
+            contentType:"application/json;charset=UTF-8",
             dataType: "json",
-            data: {
-                userId: userId,
-                roleId: roleId
-            },
+            data: JSON.stringify(arr),
             success: function (json) {
                 // TODO: 统一提示处理
                 alert(json.msg);
@@ -244,6 +249,7 @@
 
 </script>
 
+<!-- TODO: 删除 -->
 <script th:inline="javascript">
     $(function () {
         // 初始化菜单

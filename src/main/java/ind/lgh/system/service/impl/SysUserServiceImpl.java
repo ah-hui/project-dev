@@ -5,6 +5,8 @@ import ind.lgh.system.repository.SysUserRepository;
 import ind.lgh.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
  * @author lgh
  * @since 2017-12-21
  */
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
 
@@ -41,7 +44,7 @@ public class SysUserServiceImpl implements SysUserService {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SysUser su = findById(user.getId());
         // 修改
-        if(su != null){
+        if (su != null) {
             // set允许用户编辑的字段
             su.setLoginName(user.getLoginName());
             su.setPhone(user.getPhone());

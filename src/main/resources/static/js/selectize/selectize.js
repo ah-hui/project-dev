@@ -1146,7 +1146,7 @@
 	
 		/**
 		 * Triggered when the user rolls over
-		 * an option in the autocomplete dropdown menu.
+		 * an option in the autocomplete dropdown permission.
 		 *
 		 * @param {object} e
 		 * @returns {boolean}
@@ -1158,7 +1158,7 @@
 	
 		/**
 		 * Triggered when the user clicks on an option
-		 * in the autocomplete dropdown menu.
+		 * in the autocomplete dropdown permission.
 		 *
 		 * @param {object} e
 		 * @returns {boolean}
@@ -1345,7 +1345,7 @@
 		},
 	
 		/**
-		 * Sets the selected item in the dropdown menu
+		 * Sets the selected item in the dropdown permission
 		 * of available options.
 		 *
 		 * @param {object} $object
@@ -1528,7 +1528,7 @@
 	
 		/**
 		 * Refreshes the list of available options shown
-		 * in the autocomplete dropdown menu.
+		 * in the autocomplete dropdown permission.
 		 *
 		 * @param {boolean} triggerDropdown
 		 */
@@ -1962,7 +1962,7 @@
 				if (self.isSetup) {
 					$options = self.$dropdown_content.find('[data-selectable]');
 	
-					// update menu / remove the option (if this is not one item being added as part of series)
+					// update permission / remove the option (if this is not one item being added as part of series)
 					if (!self.isPending) {
 						$option = self.getOption(value);
 						value_next = self.getAdjacentOption($option, 1).attr('data-value');
@@ -1972,7 +1972,7 @@
 						}
 					}
 	
-					// hide the menu if the maximum number of items have been selected or no options are left
+					// hide the permission if the maximum number of items have been selected or no options are left
 					if (!$options.length || self.isFull()) {
 						self.close();
 					} else {
@@ -2228,7 +2228,7 @@
 		},
 	
 		/**
-		 * Closes the autocomplete dropdown menu.
+		 * Closes the autocomplete dropdown permission.
 		 */
 		close: function() {
 			var self = this;

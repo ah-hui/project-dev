@@ -54,6 +54,12 @@ public class SimpleRole extends BaseEntity {
             @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID")})
     private List<SimplePermission> permissions;
 
+    /**
+     * 角色权限中间表list
+     */
+    @Transient
+    private List<SimpleRolePermission> rolePermissions;
+
 //    /**
 //     * 用户角色 - 多对多
 //     */

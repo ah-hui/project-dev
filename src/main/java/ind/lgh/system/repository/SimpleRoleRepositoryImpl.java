@@ -6,6 +6,6 @@ package ind.lgh.system.repository;
  * @author lgh
  * @since 2017-12-21
  */
-public class SimpleRoleRepositoryImpl extends BaseRepository {
+public class SimpleRoleRepositoryImpl {
 
 }

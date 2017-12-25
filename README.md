@@ -28,3 +28,4 @@ Spring Boot的使用案例
 # T02:
 整合Apache Shiro加入登录认证和权限管理
 - 添加Shiro实现一套RBAC（Role-Based Access Control）
+- 添加前端展示的ztree、bootstrap table

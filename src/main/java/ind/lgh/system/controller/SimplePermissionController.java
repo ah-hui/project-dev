@@ -10,13 +10,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 简单UserRoleMenu权限模型--菜单
+ * RBAC模型--权限
  *
  * @author lgh
  * @since 2017-12-21
  */
 @Controller
-@RequestMapping("/simple/menu")
+@RequestMapping("/simple/permission")
 public class SimplePermissionController extends BaseController {
 
     @Resource
@@ -24,48 +24,48 @@ public class SimplePermissionController extends BaseController {
 
     @RequestMapping("")
     public String index1() {
-        return "redirect:/simple/menu/list";
+        return "redirect:/simple/permission/list";
     }
 
     @RequestMapping("/")
     public String index() {
-        return "redirect:/simple/menu/list";
+        return "redirect:/simple/permission/list";
     }
 
     @RequestMapping("/list")
     public String list(Model model) {
-//        List<SimplePermission> menus = simplePermissionService.findAll();
-//        model.addAttribute("menus", menus);
-        return "/simple/menu/list";
+        List<SimplePermission> permissions = simplePermissionService.findAll();
+        model.addAttribute("permissions", permissions);
+        return "/simple/permission/list";
     }
 
     @RequestMapping("/toAdd")
     public String toAdd() {
-        return "/simple/menu/menuAdd";
+        return "/simple/permission/permissionAdd";
     }
 
     @RequestMapping("/add")
-    public String add(SimplePermission menu) {
-//        simplePermissionService.save(menu);
-        return "redirect:/simple/menu/list";
+    public String add(SimplePermission permission) {
+        simplePermissionService.save(permission);
+        return "redirect:/simple/permission/list";
     }
 
     @RequestMapping("/toEdit")
     public String toEdit(Model model, Integer id) {
-//        SimplePermission menu = simplePermissionService.findById(id);
-//        model.addAttribute("menu", menu);
-        return "/simple/menu/menuEdit";
+        SimplePermission permission = simplePermissionService.findById(id);
+        model.addAttribute("permission", permission);
+        return "/simple/permission/permissionEdit";
     }
 
     @RequestMapping("/edit")
-    public String edit(SimplePermission menu) {
-//        simplePermissionService.save(menu);
-        return "redirect:/simple/menu/list";
+    public String edit(SimplePermission permission) {
+        simplePermissionService.save(permission);
+        return "redirect:/simple/permission/list";
     }
 
     @RequestMapping("/delete")
     public String delete(Integer id) {
-//        simplePermissionService.delete(id);
-        return "redirect:/simple/menu/list";
+        simplePermissionService.delete(id);
+        return "redirect:/simple/permission/list";
     }
 }
