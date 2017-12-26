@@ -36,6 +36,7 @@ public class SimplePermission extends BaseEntity {
     /**
      * 资源类型
      * [permission|button]
+     * TODO: 计划之后新增字典对象存入数据库来管理，现在先写死在前台（权限新增页面）
      */
     @Column(name = "resource_type", columnDefinition = "enum('permission','button')")
     private String resourceType;

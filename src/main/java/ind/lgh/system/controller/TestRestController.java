@@ -1,6 +1,7 @@
 package ind.lgh.system.controller;
 
 import ind.lgh.system.domain.SysUser;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +18,7 @@ import java.util.*;
  * @author lgh
  * @since 2017-12-21
  */
+@Api(value = "TestRestController", tags = {"TestRestController"})
 @RestController
 @RequestMapping(value = "/rest/test/user")
 public class TestRestController {

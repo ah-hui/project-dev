@@ -35,6 +35,11 @@ public class SimplePermissionServiceImpl implements SimplePermissionService{
     }
 
     @Override
+    public List<SimplePermission> findByResourceType(String resourceType) {
+        return simplePermissionRepository.findByResourceType(resourceType);
+    }
+
+    @Override
     public SimplePermission save(SimplePermission simplePermission) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
         SimplePermission sp = findById(simplePermission.getId());

@@ -40,7 +40,10 @@ public class SimplePermissionController extends BaseController {
     }
 
     @RequestMapping("/toAdd")
-    public String toAdd() {
+    public String toAdd(Model model) {
+        // 查询出全部类型为menu的权限（新增时可以作为父级节点）
+        List<SimplePermission> permissions = simplePermissionService.findByResourceType("menu");
+        model.addAttribute("permissions", permissions);
         return "/simple/permission/permissionAdd";
     }
 

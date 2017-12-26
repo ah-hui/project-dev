@@ -16,6 +16,8 @@ public interface SimplePermissionService {
 
     SimplePermission findById(Integer id);
 
+    List<SimplePermission> findByResourceType(String resourceType);
+
     SimplePermission save(SimplePermission simplePermission);
 
     void delete(Integer id);

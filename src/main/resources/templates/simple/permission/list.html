@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/ztree/metroStyle/metroStyle.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table-tree-column.css}"/>
     <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
     <script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script th:src="@{/js/ztree/jquery.ztree.core.js}"></script>
     <script th:src="@{/js/bootstraptable/bootstrap-table.js}"></script>
     <script th:src="@{/js/bootstraptable/bootstrap-table-tree-column.js}"></script>
 </head>
@@ -32,37 +30,14 @@
     </div>
 </div>
 
-<div class="form-group">
-    <div class="col-sm-12 control-label">
-        <ul id="treeDemo" class="ztree"></ul>
-    </div>
-</div>
-
 <script th:inline="javascript">
     // 获取相对路径 - /**/作用是为了不让编辑器报错
+    var addPath = new String(/*[[@{/simple/permission/toAdd}]]*/);
     var editPath = new String(/*[[@{/simple/permission/toEdit}]]*/);
     var deletePath = new String(/*[[@{/simple/permission/delete}]]*/);
-
-    var zTreeObj;
-    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
-    var setting = {};
-    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
-    var zNodes = [
-        {
-            name: "test1", open: true, children: [
-            {name: "test1_1"}, {name: "test1_2"}]
-        },
-        {
-            name: "test2", open: true, children: [
-            {name: "test2_1"}, {name: "test2_2"}]
-        }
-    ];
     $(function () {
-        // zTree
-        zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         // bootstrap table
         var arr = [[${permissions}]];
-
         var table = $('#table');
         table.bootstrapTable({
             data: arr,
@@ -113,6 +88,7 @@
                     formatter: function (value, row, index) {
                         var editA = "<a href=" + editPath + "?id=" + row.id + ">编辑</a>";
                         var deleteA = "<a href=" + deletePath + "?id=" + row.id + ">删除</a>";
+                        // if(row.resourceType == "menu"){}
                         return editA + "&nbsp;&nbsp;" + deleteA;
                     }
                 }
