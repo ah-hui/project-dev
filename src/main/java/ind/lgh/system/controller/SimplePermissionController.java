@@ -1,12 +1,19 @@
 package ind.lgh.system.controller;
 
 import ind.lgh.system.domain.SimplePermission;
+import ind.lgh.system.domain.SysUser;
 import ind.lgh.system.service.SimplePermissionService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -70,5 +77,19 @@ public class SimplePermissionController extends BaseController {
     public String delete(Integer id) {
         simplePermissionService.delete(id);
         return "redirect:/simple/permission/list";
+    }
+
+
+    @RequestMapping(value = "/listMenuByCurrentUser", method = RequestMethod.POST)
+    @ResponseBody
+    public List<SimplePermission> listMenuByCurrentUser(HttpServletRequest request) {
+        List<SimplePermission> menus = null;
+        try {
+            SysUser currentUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+            menus = simplePermissionService.findMenuByUserId(currentUser.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return menus;
     }
 }

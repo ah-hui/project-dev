@@ -42,7 +42,10 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser save(SysUser user) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
-        SysUser su = findById(user.getId());
+        SysUser su = null;
+        if (user.getId() != null) {
+            su = findById(user.getId());
+        }
         // 修改
         if (su != null) {
             // set允许用户编辑的字段
@@ -50,12 +53,15 @@ public class SysUserServiceImpl implements SysUserService {
             su.setPhone(user.getPhone());
             su.setNickName(user.getNickName());
             su.setEmail(user.getEmail());
+            su.setUpdatedBy(-1);
             su.setLastUpdated(new Date());
             // 保存，高并发下建议用saveAndFlush
             return userRepository.saveAndFlush(su);
         }
         // 新增
+        user.setCreatedBy(-1);
         user.setDateCreated(new Date());
+        user.setUpdatedBy(-1);
         user.setLastUpdated(new Date());
         // 保存，高并发下建议用saveAndFlush
         return userRepository.saveAndFlush(user);

@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>permissionEdit</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/selectize/selectize.css}"/>
-    <link rel="stylesheet" th:href="@{/css/selectize/selectize.bootstrap3.css}"/>
-    <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/selectize/standalone/selectize.min.js}"></script>
-</head>
+<!-- 引入head-包含css等 -->
+<head th:include="common/common_head :: commonHead('修改权限')"></head>
 <body class="container">
 <!-- 引入header - 通过tag名称引用 -->
 <header th:replace="common/header :: header"></header>
 <!-- 当前位置 -->
-<div class="current">修改菜单</div>
+<div class="current">修改权限</div>
 <!-- 内容 -->
 <div class="content">
     <form class="form-horizontal" th:action="@{/simple/permission/edit}" th:object="${permission}" method="post">
@@ -31,7 +20,7 @@
         <div class="form-group">
             <label for="permission" class="col-sm-2 control-label">Permission</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="code" id="permission" th:value="*{permission}"
+                <input type="text" class="form-control" name="permission" id="permission" th:value="*{permission}"
                        placeholder="Permission"/>
             </div>
         </div>
@@ -39,7 +28,7 @@
             <label for="resourceType" class="col-sm-2 control-label">ResourceType</label>
             <div class="col-sm-4">
                 <!-- TODO: 现在下拉框值域写死在前台 -->
-                <select id="resourceType" name="resourceType" class="selectize-control" placeholder="选择一个..." disabled>
+                <select id="resourceType" class="selectize-control" placeholder="选择一个..." disabled>
                 </select>
             </div>
         </div>
@@ -66,6 +55,8 @@
         </div>
     </form>
 
+    <!-- 引入JS -->
+    <div th:include="common/onload_js :: onloadJS"></div>
     <script th:inline="javascript">
         var permission = [[${permission}]];
         $(function () {

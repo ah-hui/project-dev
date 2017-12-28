@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>roleAdd</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-</head>
+<!-- 引入head-包含css等 -->
+<head th:include="common/common_head :: commonHead('添加角色')"></head>
 <body class="container">
 <!-- 引入header - 通过tag名称引用 -->
 <header th:replace="common/header :: header"></header>
@@ -47,5 +40,7 @@
         </div>
     </form>
 </div>
+<!-- 引入JS -->
+<div th:include="common/onload_js :: onloadJS"></div>
 </body>
 </html>

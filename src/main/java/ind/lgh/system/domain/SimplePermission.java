@@ -54,17 +54,11 @@ public class SimplePermission extends BaseEntity {
     private Integer parentId;
 
     /**
-     * 父编号列表
-     */
-    @Column(name = "parent_ids", length = 60)
-    private String parentIds;
-
-    /**
      * 是否有效
      * true 有效,false 无效
      */
     @Column(name = "valid")
-    private Boolean valid = true;
+    private Boolean valid;
 
     /**
      * 角色描述
@@ -77,5 +71,20 @@ public class SimplePermission extends BaseEntity {
 //            @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
 //            @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
 //    private List<SimpleRole> roles;
+
+    public SimplePermission() {
+    }
+
+    /**
+     * JPA 查询部分字段必须提供构造函数并使用
+     *
+     * @see ind.lgh.system.repository.SimplePermissionRepository
+     */
+    public SimplePermission(Integer id, String name, Integer parentId, String url) {
+        this.setId(id);
+        this.name = name;
+        this.parentId = parentId;
+        this.url = url;
+    }
 
 }

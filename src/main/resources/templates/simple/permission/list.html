@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>permissionList</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table-tree-column.css}"/>
-    <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script th:src="@{/js/bootstraptable/bootstrap-table.js}"></script>
-    <script th:src="@{/js/bootstraptable/bootstrap-table-tree-column.js}"></script>
-</head>
+<!-- 引入head-包含css等 -->
+<head th:include="common/common_head :: commonHead('权限列表')"></head>
 <body class="container">
 <!-- 引入header - 通过tag名称引用 -->
 <header th:replace="common/header :: header"></header>
 <!-- 当前位置 -->
-<div class="current">菜单列表</div>
+<div class="current">权限列表</div>
 <!-- 内容 -->
 <div class="content">
     <table id="table" class="table table-hover"></table>
@@ -30,6 +17,8 @@
     </div>
 </div>
 
+<!-- 引入JS -->
+<div th:include="common/onload_js :: onloadJS"></div>
 <script th:inline="javascript">
     // 获取相对路径 - /**/作用是为了不让编辑器报错
     var addPath = new String(/*[[@{/simple/permission/toAdd}]]*/);

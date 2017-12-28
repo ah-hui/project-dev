@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>userList</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/selectize/selectize.css}"/>
-    <link rel="stylesheet" th:href="@{/css/selectize/selectize.bootstrap3.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
-    <script th:src="@{/js/selectize/standalone/selectize.min.js}"></script>
-</head>
+<!-- 引入head-包含css等 -->
+<head th:include="common/common_head :: commonHead('用户列表')"></head>
 <body class="container">
 <!-- 引入header - 通过tag名称引用 -->
 <header th:replace="common/header :: header"></header>
@@ -119,6 +107,8 @@
     </div><!-- /.modal -->
 </div>
 
+<!-- 引入JS -->
+<div th:include="common/onload_js :: onloadJS"></div>
 <script th:inline="javascript">
     $(function () {
         // 隐藏模态框
@@ -231,7 +221,7 @@
         $.ajax({
             url: "associateRole",
             type: "post",
-            contentType:"application/json;charset=UTF-8",
+            contentType: "application/json;charset=UTF-8",
             dataType: "json",
             data: JSON.stringify(arr),
             success: function (json) {
@@ -247,42 +237,6 @@
         });
     }
 
-</script>
-
-<!-- TODO: 删除 -->
-<script th:inline="javascript">
-    $(function () {
-        // 初始化菜单
-//        initMenu();
-    });
-
-    function initMenu() {
-        $.ajax({
-            url: "../simple/role/listNameIsLike",
-            type: "post",
-            dataType: "json",
-            data: {
-                name: query
-            },
-            success: function (data) {
-
-            },
-            error: function (e) {
-                alert("错误！" + e);
-            }
-        });
-    }
-
-    function changeActive(obj) {
-        var currentA = $(obj);
-        var currentLi = currentA.parent();
-        if (currentLi.hasClass("active")) {
-            return;
-        }
-        var parentUl = currentLi.parent();
-        parentUl.children("li[class='active']").removeClass("active");
-        currentLi.addClass("active");
-    }
 </script>
 </body>
 </html>

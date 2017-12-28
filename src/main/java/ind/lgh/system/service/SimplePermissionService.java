@@ -22,4 +22,6 @@ public interface SimplePermissionService {
 
     void delete(Integer id);
 
+    List<SimplePermission> findMenuByUserId(Integer userId);
+
 }

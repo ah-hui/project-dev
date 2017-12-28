@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 @Service("simplePermissionService")
-public class SimplePermissionServiceImpl implements SimplePermissionService{
+public class SimplePermissionServiceImpl implements SimplePermissionService {
 
     @Autowired
     private SimplePermissionRepository simplePermissionRepository;
@@ -42,25 +42,31 @@ public class SimplePermissionServiceImpl implements SimplePermissionService{
     @Override
     public SimplePermission save(SimplePermission simplePermission) {
         // 修改时，必须先findOne然后save，因为save时的isNew检查的是version字段而不是id
-        SimplePermission sp = findById(simplePermission.getId());
+        SimplePermission sp = null;
+        if (simplePermission.getId() != null) {
+            sp = findById(simplePermission.getId());
+        }
         // 修改
         if (sp != null) {
             // set允许用户编辑的字段
             sp.setPermission(simplePermission.getPermission());
             sp.setName(simplePermission.getName());
-            sp.setResourceType(simplePermission.getResourceType());
             sp.setUrl(simplePermission.getUrl());
-            sp.setParentId(simplePermission.getParentId());
-            sp.setParentIds(simplePermission.getParentIds());
-            sp.setValid(simplePermission.getValid());
             sp.setDescription(simplePermission.getDescription());
+            sp.setUpdatedBy(-1);
             sp.setLastUpdated(new Date());
             // 保存，高并发下建议用saveAndFlush
             return simplePermissionRepository.saveAndFlush(sp);
         }
         // 新增
+        simplePermission.setCreatedBy(-1);
         simplePermission.setDateCreated(new Date());
+        simplePermission.setUpdatedBy(-1);
         simplePermission.setLastUpdated(new Date());
+        if (simplePermission.getParentId() == null) {
+            // 未设置parent则为根节点
+            simplePermission.setParentId(0);
+        }
         // 保存，高并发下建议用saveAndFlush
         return simplePermissionRepository.saveAndFlush(simplePermission);
     }
@@ -68,5 +74,10 @@ public class SimplePermissionServiceImpl implements SimplePermissionService{
     @Override
     public void delete(Integer id) {
         simplePermissionRepository.delete(id);
+    }
+
+    @Override
+    public List<SimplePermission> findMenuByUserId(Integer userId) {
+        return simplePermissionRepository.findMenuByUserId(userId);
     }
 }

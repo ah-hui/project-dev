@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>roleEdit</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" th:href="@{/css/icheck/skins/minimal/blue.css}"/>
-    <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/icheck/icheck.js}"></script>
-</head>
+<!-- 引入head-包含css等 -->
+<head th:include="common/common_head :: commonHead('修改角色')"></head>
 <body class="container">
 <!-- 引入header - 通过tag名称引用 -->
 <header th:replace="common/header :: header"></header>
@@ -69,6 +59,8 @@
     </form>
 </div>
 
+<!-- 引入JS -->
+<div th:include="common/onload_js :: onloadJS"></div>
 <script th:inline="javascript">
     var permissionIds = new Set();
     $(function () {

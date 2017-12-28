@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="onloadJS">
+    <script th:src="@{/js/jquery/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/js/selectize/standalone/selectize.min.js}"></script>
+    <script th:src="@{/js/ztree/jquery.ztree.all.js}"></script>
+    <script th:src="@{/js/icheck/icheck.js}"></script>
+    <script th:src="@{/js/bootstraptable/bootstrap-table.js}"></script>
+    <script th:src="@{/js/bootstraptable/bootstrap-table-tree-column.js}"></script>
+
+    <!-- 初始化菜单 -->
+    <script th:inline="javascript">
+        var path = new String(/*[[@{/user/list}]]*/).replace("/user/list", "");
+        var current = window.location.href;
+        var url = current.substring(current.indexOf(path), current.length);
+        var escapePrefix = "";
+        $(function () {
+            // 蛋疼的thymeleaf发送ajax时自动补全url的classpath，默认是当前controller的requestMapping
+            // 所以发送ajax时url要处理向外跳出n层
+            calcEscapePrefix();
+            // 初始化菜单
+            initMenu();
+        });
+
+        function calcEscapePrefix(){
+            var cleanUrl = url.replace(path, "");
+            var num = cleanUrl.split("/").length;
+            if (cleanUrl.charAt(0) == "/") {
+                num--;
+            }
+            if (cleanUrl.charAt(cleanUrl.length-1) == "/") {
+                num--;
+            }
+            num--;
+            for(var i=0;i<num;i++){
+                escapePrefix+="../";
+            }
+        }
+
+        function initMenu() {
+            $.ajax({
+                url: escapePrefix + "simple/permission/listMenuByCurrentUser",
+                type: "post",
+                dataType: "json",
+                // data: {},
+                success: function (data) {
+                    var html = "";
+//                <li><a href="#">首页</a></li>
+                    if (data != null) {
+                        data.forEach(function (e) {
+                            html += "<li><a href=\"" + path + e.url + "\">" + e.name + "</a></li>";
+                        });
+                    }
+                    $("#navbar > ul").eq(0).html(html);
+                    // active li标签
+                    activeLi();
+                },
+                error: function (e) {
+                    alert("错误！" + e);
+                }
+            });
+        }
+
+        function activeLi() {
+            var as = $("#navbar > ul").eq(0).find("a");
+            for (var prop in as) {
+                var a = as[prop];
+                if (a && a.pathname && a.pathname == url) {
+                    $(a).parent().addClass("active");
+                }
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

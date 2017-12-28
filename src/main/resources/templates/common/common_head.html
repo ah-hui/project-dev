@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- title: 页面标题 -->
+<head th:fragment="commonHead(title)">
+    <title th:text="${title}"></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+    <!-- bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}"/>
+    <!-- 自定义css -->
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <!-- selectize下拉框 -->
+    <link rel="stylesheet" th:href="@{/css/selectize/selectize.css}"/>
+    <link rel="stylesheet" th:href="@{/css/selectize/selectize.bootstrap3.css}"/>
+    <!-- icheck -->
+    <link rel="stylesheet" th:href="@{/css/icheck/skins/minimal/blue.css}"/>
+    <!-- ztree -->
+    <link rel="stylesheet" th:href="@{/css/ztree/metroStyle/metroStyle.css}"/>
+    <!-- bootstraptable -->
+    <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstraptable/bootstrap-table-tree-column.css}"/>
+</head>
+</html>

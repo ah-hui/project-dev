@@ -37,7 +37,7 @@ public class SimpleRole extends BaseEntity {
      * true 有效,false 无效
      */
     @Column(name = "valid")
-    private Boolean valid = true;
+    private Boolean valid;
 
     /**
      * 角色描述
