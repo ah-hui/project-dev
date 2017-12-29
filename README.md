@@ -24,3 +24,7 @@ Spring Boot的使用案例
 - 整理user和role的多对多关系，使用注解实现。主要内容是JPA查询user时关联查询出对应的role
 - 添加JavaMail发送邮件
 - 添加QueryDSL做复杂多表关联查询
+
+# T03: 
+整合datax源码做ETL
+- 整合datax源码，添加常用reader和writer插件
