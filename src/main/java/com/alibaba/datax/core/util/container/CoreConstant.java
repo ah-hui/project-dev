@@ -83,6 +83,10 @@ public class CoreConstant {
 
     public static final String DATAX_JOB_SETTING_KEYVERSION = "job.setting.keyVersion";
 
+	/**
+	 * 源码修改标记
+	 * 由于byte是保留字，实体类无法用变量对应，所以修改：byte->speedByte
+	 */
 	public static final String DATAX_JOB_SETTING_SPEED_BYTE = "job.setting.speed.byte";
 
     public static final String DATAX_JOB_SETTING_SPEED_RECORD = "job.setting.speed.record";

@@ -1,13 +1,15 @@
 # Spring Boot Example
 
+---
+
 **[github地址](https://github.com/JesseyGone/project-dev)**
 
 Spring Boot的使用案例
 
-# T00: 
+## T00: 
 仅保存项目spring-boot初始化状态
 
-# T01: 
+## T01: 
 初始化仓库后添加基本基础设施和实体并完成user的CRUD（thymeleaf实现/前后端不分离）
 - 添加Spring-data-jpa/lombok/druid
 - 添加最简单的UserRoleMenu权限模型但尚未实现业务逻辑，SimpleRole系列
@@ -25,6 +27,31 @@ Spring Boot的使用案例
 - 添加JavaMail发送邮件
 - 添加QueryDSL做复杂多表关联查询
 
-# T03: 
+## T03: 
 整合datax源码做ETL
-- 整合datax源码，添加常用reader和writer插件
+- 整合`datax`源码，添加常用reader和writer插件
+- 扩展功能，实现服务端和客户端（同在本机）
+- 整理mysql一套reader和writer和job模板对应的实体对象
+```
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "",
+          "parameter": {}
+        },
+        "writer": {
+          "name": "",
+          "parameter": {}
+        }
+      }
+    ],
+    "setting": {
+      "speed": {},
+      "errorLimit": {}
+    }
+  }
+}
+```
+- 实现服务端和客户端一组服务，调试成功，使用datax从db1到db2抽取转换保存

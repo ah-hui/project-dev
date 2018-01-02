@@ -335,19 +335,19 @@
             </plugin>
         </plugins>
 
-        <resources>
-            <resource>
-                <directory>src/lib</directory>
-                <targetPath>WEB-INF/lib/</targetPath>
-                <includes>
-                    <include>**/*.jar</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <targetPath>WEB-INF/classes/</targetPath>
-            </resource>
-        </resources>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/lib</directory>-->
+                <!--<targetPath>WEB-INF/lib/</targetPath>-->
+                <!--<includes>-->
+                    <!--<include>**/*.jar</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<targetPath>WEB-INF/classes/</targetPath>-->
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
 
 

@@ -1,0 +1,26 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "",
+          "parameter": {}
+        },
+        "writer": {
+          "name": "",
+          "parameter": {}
+        }
+      }
+    ],
+    "setting": {
+      "speed": {
+        "channel": 1,
+        "byte": 104857600
+      },
+      "errorLimit": {
+        "record": 10,
+        "percentage": 0.05
+      }
+    }
+  }
+}

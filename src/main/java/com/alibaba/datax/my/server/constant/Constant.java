@@ -22,7 +22,7 @@ public class Constant {
     /**
      * 默认的客户端回调地址
      */
-    public static String DEFAULT_CALL_BACK_URL = "/datax/receiveTaskStats";
+    public static String DEFAULT_CALL_BACK_URL = "/client/datax/receiveTaskStats";
 
     /**
      * 四种线程池之一：
@@ -41,5 +41,16 @@ public class Constant {
      * 是否 任务正在执行
      */
     public static boolean TASK_IS_RUNNING = false;
+
+    /**
+     * 测试用服务器HOST+IP
+     * 测试时服务器就是本机
+     */
+    public static String SERVER_URL_4_TEST = "http://localhost:8080/";
+
+    /**
+     * 服务器datax服务地址
+     */
+    public static String SERVER_TASK_URL = "/server/datax/runTask";
 
 }

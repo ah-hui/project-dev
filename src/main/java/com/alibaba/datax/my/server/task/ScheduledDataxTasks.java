@@ -18,8 +18,8 @@ import java.util.Date;
  * @since 2017-12-21
  */
 @Component
-public class ScheduledTasks {
-    private static final Logger LOG = LoggerFactory.getLogger(ScheduledTasks.class);
+public class ScheduledDataxTasks {
+    private static final Logger LOG = LoggerFactory.getLogger(ScheduledDataxTasks.class);
     private static final SimpleDateFormat dataFormat = new SimpleDateFormat("HH:mm:ss");
 
     /**

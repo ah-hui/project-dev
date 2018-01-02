@@ -1,0 +1,20 @@
+{
+  "job": {
+    "content": [
+      {
+        "reader": {
+          "name": "",
+          "parameter": {}
+        },
+        "writer": {
+          "name": "",
+          "parameter": {}
+        }
+      }
+    ],
+    "setting": {
+      "speed": {},
+      "errorLimit": {}
+    }
+  }
+}

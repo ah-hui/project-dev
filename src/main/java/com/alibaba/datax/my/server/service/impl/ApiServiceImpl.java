@@ -6,12 +6,14 @@ import com.alibaba.datax.my.server.domain.TaskStats;
 import com.alibaba.datax.my.server.service.ApiService;
 import com.alibaba.datax.my.server.utils.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Service;
 
 /**
  * datax任务api接口实现
  *
  * @author lgh
  */
+@Service
 public class ApiServiceImpl implements ApiService {
 
     /**
