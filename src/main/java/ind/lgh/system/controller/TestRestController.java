@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * 构建RESTful API与单元测试
  * 1.@RestController=@Controller+@ResponseBody
- * 2.以SysSysUser为例，RESTful风格编写API
+ * 2.以SysUser为例，RESTful风格编写API
  * 3.单元测试-当然可以使用Postman之类的插件测试
  *
  * @author lgh

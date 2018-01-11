@@ -1,11 +1,10 @@
 package ind.lgh.system.controller;
 
-import ind.lgh.system.exception.RestException;
 import ind.lgh.system.exception.SysException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * hello world web测试
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author lgh
  * @since 2017-12-21
  */
-@Controller
+@RestController
 public class HelloWorldController {
 
     @RequestMapping("/hello")
@@ -31,16 +30,6 @@ public class HelloWorldController {
     @RequestMapping("/hello1")
     public void hello1() throws Exception {
         throw new SysException("异常测试-hello1异常！");
-    }
-
-    /**
-     * 测试REST异常处理
-     *
-     * @throws Exception
-     */
-    @RequestMapping("/rest1")
-    public void rest1() throws Exception {
-        throw new RestException("异常测试-rest1异常！");
     }
 
     @RequestMapping("/")
