@@ -1,5 +1,6 @@
 package ind.lgh.system.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,7 +33,9 @@ public class SysUser extends BaseEntity {
 
     /**
      * 加密后的密码
+     * 不返回的属性
      */
+    @JSONField(serialize = false)
     private String hashedPassword;
 
     /**

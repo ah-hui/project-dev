@@ -9,7 +9,9 @@ Spring Boot的使用案例
 
 # T04: 
 REST接口
-- 添加Spring-data-jpa/lombok/druid
+- 配置fastjson解析数据
+- ORM换用mybatis，添加tk-mybatis和pagehelper
+- 添加lombok/druid
 - 添加RESTful风格编程示例（TestRestController和单元测试）
 - 添加Swagger2为RESTful API组织文档
 - 添加定时任务支持，测试请在主程序启用定时任务
@@ -17,6 +19,4 @@ REST接口
 - 切换日志记录为log4j，并在多环境配置下做不同配置
 - 添加AOP实现的web请求记录
 
-- 配置fastjson解析数据
-- ORM换用mybatis，添加tk-mybatis和pagehelper
 - 集成resteasy

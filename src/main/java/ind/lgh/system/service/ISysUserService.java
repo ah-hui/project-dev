@@ -1,7 +1,6 @@
 package ind.lgh.system.service;
 
 import ind.lgh.system.domain.JsonResult;
-import ind.lgh.system.domain.SysUser;
 
 /**
  * 用户Service接口
@@ -13,5 +12,5 @@ public interface ISysUserService {
 
     JsonResult getOne(Integer id);
 
-    SysUser get(Integer id);
+    JsonResult get(Integer id);
 }

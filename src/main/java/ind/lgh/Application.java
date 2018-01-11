@@ -22,7 +22,6 @@ import java.util.List;
  * @author lgh
  * @since 2017-12-21
  */
-@EnableWebMvc
 @SpringBootApplication
 @MapperScan(basePackages = "ind.lgh.system.mapper")
 public class Application extends WebMvcConfigurerAdapter {
@@ -42,9 +41,9 @@ public class Application extends WebMvcConfigurerAdapter {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         //处理中文乱码问题
-//        List<MediaType> fastMediaTypes = new ArrayList<>();
-//        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-//        fastConverter.setSupportedMediaTypes(fastMediaTypes);
+        // List<MediaType> fastMediaTypes = new ArrayList<>();
+        // fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
+        // fastConverter.setSupportedMediaTypes(fastMediaTypes);
         //在converter中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
         //将converter添加到converters中

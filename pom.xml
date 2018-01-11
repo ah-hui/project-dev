@@ -138,11 +138,17 @@
             <version>2.5.1</version>
         </dependency>
         <!-- resteasy -->
-        <!--<dependency>-->
-            <!--<groupId>com.paypal.springboot</groupId>-->
-            <!--<artifactId>resteasy-spring-boot-starter</artifactId>-->
-            <!--<version>2.3.4-RELEASE</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.paypal.springboot</groupId>
+            <artifactId>resteasy-spring-boot-starter</artifactId>
+            <version>2.3.4-RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jackson2-provider</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- 手动添加依赖   end -->
     </dependencies>
@@ -154,28 +160,28 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <!-- mybatis生成器插件 -->
-           <!-- <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <configuration>
-                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
-                    <overwrite>true</overwrite>
-                    <verbose>true</verbose>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>tk.mybatis</groupId>
-                        <artifactId>mapper</artifactId>
-                        <version>3.5.0</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
+            <!-- <plugin>
+                 <groupId>org.mybatis.generator</groupId>
+                 <artifactId>mybatis-generator-maven-plugin</artifactId>
+                 <version>1.3.2</version>
+                 <configuration>
+                     <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+                     <overwrite>true</overwrite>
+                     <verbose>true</verbose>
+                 </configuration>
+                 <dependencies>
+                     <dependency>
+                         <groupId>mysql</groupId>
+                         <artifactId>mysql-connector-java</artifactId>
+                         <version>${mysql.version}</version>
+                     </dependency>
+                     <dependency>
+                         <groupId>tk.mybatis</groupId>
+                         <artifactId>mapper</artifactId>
+                         <version>3.5.0</version>
+                     </dependency>
+                 </dependencies>
+             </plugin>-->
         </plugins>
     </build>
 
