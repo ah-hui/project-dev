@@ -6,9 +6,6 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -16,8 +13,6 @@ import java.util.List;
 
 /**
  * Spring主程序.
- * 启用定时任务 @EnableScheduling
- * 启用异步调用 @EnableAsync
  *
  * @author lgh
  * @since 2017-12-21
@@ -35,18 +30,20 @@ public class Application extends WebMvcConfigurerAdapter {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
-        //定义一个converter转换消息的对象
+        // 定义一个converter转换消息的对象
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         //添加fast-json的配置信息，比如：是否需要格式化返回的json数据
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        //处理中文乱码问题
-        // List<MediaType> fastMediaTypes = new ArrayList<>();
-        // fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-        // fastConverter.setSupportedMediaTypes(fastMediaTypes);
-        //在converter中添加配置信息
+        /*
+        // 处理中文乱码问题
+        List<MediaType> fastMediaTypes = new ArrayList<>();
+        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
+        fastConverter.setSupportedMediaTypes(fastMediaTypes);
+        */
+        // 在converter中添加配置信息
         fastConverter.setFastJsonConfig(fastJsonConfig);
-        //将converter添加到converters中
+        // 将converter添加到converters中
         converters.add(fastConverter);
     }
 

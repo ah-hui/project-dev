@@ -27,12 +27,6 @@ public class BaseEntity implements Serializable {
 
     private Integer version;
 
-    @Transient
-    private Integer page = 1;
-
-    @Transient
-    private Integer rows = 10;
-
     /**
      * 创建人
      * 不返回的属性

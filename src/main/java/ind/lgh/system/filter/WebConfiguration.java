@@ -46,7 +46,7 @@ public class WebConfiguration {
         @Override
         public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
-            System.out.println("This is MyFilter, uri:" + request.getRequestURI());
+            System.out.println("MyFilter, URI: " + request.getRequestURI()+", method: "+request.getMethod());
             filterChain.doFilter(servletRequest, servletResponse);
         }
 
