@@ -140,6 +140,12 @@
             </exclusions>
         </dependency>
 
+        <!-- Neo4j -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-neo4j</artifactId>
+        </dependency>
+        
         <!-- 手动添加依赖   end -->
     </dependencies>
 
