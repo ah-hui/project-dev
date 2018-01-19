@@ -59,4 +59,23 @@ public class SysUser extends BaseEntity {
      */
     private String email;
 
+    /**
+     * 通过枚举实现map的类似功能
+     */
+    public enum FieldEnum {
+        USER_ID("user_id"),
+        STATUS("status");
+        private String fieldName;
+        FieldEnum(String fieldName) {
+            this.fieldName = fieldName;
+        }
+        public String getFieldName(){
+            return fieldName;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(FieldEnum.valueOf("USER_ID").getFieldName());
+    }
+
 }
