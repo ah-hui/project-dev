@@ -146,6 +146,14 @@
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
         </dependency>
 
+        <!-- 开发测试用 - 嵌入式neo4j-driver -->
+        <!--<dependency>-->
+            <!--<groupId>org.neo4j</groupId>-->
+            <!--<artifactId>neo4j-ogm-embedded-driver</artifactId>-->
+            <!--<version>3.0.3</version>-->
+        <!--</dependency>-->
+
+
         <!-- 手动添加依赖   end -->
     </dependencies>
 
