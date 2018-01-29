@@ -1,5 +1,7 @@
-package ind.lgh.system.domain;
+package ind.lgh.system.domain.neo4j;
 
+import ind.lgh.system.domain.neo4j.Message;
+import ind.lgh.system.domain.neo4j.Person;
 import lombok.Getter;
 import lombok.Setter;
 import org.neo4j.ogm.annotation.*;
@@ -22,7 +24,7 @@ public class Publish {
     @Transient
     private Long messageId;
 
-    @GraphId
+    @Id
     private Long id;
 
     @StartNode

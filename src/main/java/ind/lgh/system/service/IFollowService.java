@@ -1,6 +1,6 @@
 package ind.lgh.system.service;
 
-import ind.lgh.system.domain.Follow;
+import ind.lgh.system.domain.neo4j.Follow;
 import ind.lgh.system.domain.JsonResult;
 
 /**

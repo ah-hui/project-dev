@@ -1,8 +1,8 @@
 package ind.lgh.system.service.impl;
 
-import ind.lgh.system.domain.Follow;
+import ind.lgh.system.domain.neo4j.Follow;
 import ind.lgh.system.domain.JsonResult;
-import ind.lgh.system.domain.Person;
+import ind.lgh.system.domain.neo4j.Person;
 import ind.lgh.system.repository.FollowRepository;
 import ind.lgh.system.repository.PersonRepository;
 import ind.lgh.system.service.IFollowService;
@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
 
 /**
  * Follow Service接口实现
@@ -42,11 +42,11 @@ public class FollowServiceImpl implements IFollowService {
             Assert.notNull(follow.getFollowerId(), "用户信息不完整");
             Assert.notNull(follow.getFollowedId(), "用户信息不完整");
             // 先取出完整的Person
-            Person person1 = personRepository.findOne(follow.getFollowerId());
-            Person person2 = personRepository.findOne(follow.getFollowedId());
+            Optional<Person> optPerson1 = personRepository.findById(follow.getFollowerId());
+            Optional<Person> optPerson2 = personRepository.findById(follow.getFollowedId());
             // 再建立关联
-            follow.setFollower(person1);
-            follow.setFollowed(person2);
+            follow.setFollower(optPerson1.orElseThrow(() -> new Exception("Person不存在！id=" + follow.getFollowerId())));
+            follow.setFollowed(optPerson2.orElseThrow(() -> new Exception("Person不存在！id=" + follow.getFollowedId())));
             Follow f = followRepository.save(follow);
             if (f == null) {
                 return JsonResult.createFail("Person关联失败！");

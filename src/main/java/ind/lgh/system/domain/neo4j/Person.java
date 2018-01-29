@@ -1,4 +1,4 @@
-package ind.lgh.system.domain;
+package ind.lgh.system.domain.neo4j;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ public class Person {
     /**
      * 实体的标识符(只能使用Long类型)
      */
-    @GraphId
+    @Id
     @Setter
     private Long id;
 

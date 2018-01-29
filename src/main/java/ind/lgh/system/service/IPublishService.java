@@ -1,7 +1,7 @@
 package ind.lgh.system.service;
 
 import ind.lgh.system.domain.JsonResult;
-import ind.lgh.system.domain.Publish;
+import ind.lgh.system.domain.neo4j.Publish;
 
 /**
  * Publish Service接口

@@ -1,18 +1,16 @@
 package ind.lgh.system.service.impl;
 
 import ind.lgh.system.domain.JsonResult;
-import ind.lgh.system.domain.Message;
-import ind.lgh.system.domain.Person;
+import ind.lgh.system.domain.neo4j.Message;
 import ind.lgh.system.repository.MessageRepository;
-import ind.lgh.system.repository.PersonRepository;
 import ind.lgh.system.service.IMessageService;
-import ind.lgh.system.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
 
 /**
  * Message Service接口实现
@@ -34,9 +32,9 @@ public class MessageServiceImpl implements IMessageService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
     public JsonResult get(@PathParam("id") Long id) {
-        Message message = messageRepository.findOne(id);
+        Optional<Message> optMessage = messageRepository.findById(id);
         JsonResult jr = JsonResult.createSuccess("查询Message成功！");
-        jr.addData(message);
+        jr.addData(optMessage.orElse(null));
         return jr;
     }
 

@@ -1,7 +1,7 @@
 package ind.lgh.system.repository;
 
-import ind.lgh.system.domain.Publish;
-import org.springframework.data.neo4j.repository.GraphRepository;
+import ind.lgh.system.domain.neo4j.Publish;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * @since 2018-01-25
  */
 @Repository
-public interface PublishRepository extends GraphRepository<Publish> {
+public interface PublishRepository extends Neo4jRepository<Publish, Long> {
 }

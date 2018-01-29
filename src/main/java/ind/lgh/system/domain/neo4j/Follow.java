@@ -1,4 +1,4 @@
-package ind.lgh.system.domain;
+package ind.lgh.system.domain.neo4j;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +22,7 @@ public class Follow {
     @Transient
     private Long followedId;
 
-    @GraphId
+    @Id
     private Long id;
 
     /**

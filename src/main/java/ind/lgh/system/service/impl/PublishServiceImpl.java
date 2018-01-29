@@ -1,11 +1,12 @@
 package ind.lgh.system.service.impl;
 
 import ind.lgh.system.domain.*;
-import ind.lgh.system.repository.FollowRepository;
+import ind.lgh.system.domain.neo4j.Message;
+import ind.lgh.system.domain.neo4j.Person;
+import ind.lgh.system.domain.neo4j.Publish;
 import ind.lgh.system.repository.MessageRepository;
 import ind.lgh.system.repository.PersonRepository;
 import ind.lgh.system.repository.PublishRepository;
-import ind.lgh.system.service.IFollowService;
 import ind.lgh.system.service.IPublishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Follow Service接口实现
@@ -48,11 +51,11 @@ public class PublishServiceImpl implements IPublishService {
             Assert.notNull(publish.getPersonId(), "用户信息不完整");
             Assert.notNull(publish.getMessageId(), "用户信息不完整");
             // 先取出完整的Person
-            Person person = personRepository.findOne(publish.getPersonId());
-            Message message = messageRepository.findOne(publish.getMessageId());
+            Optional<Person> optPerson = personRepository.findById(publish.getPersonId());
+            Optional<Message> optMessage = messageRepository.findById(publish.getMessageId());
             // 再建立关联
-            publish.setPerson(person);
-            publish.setMessage(message);
+            publish.setPerson(optPerson.orElseThrow(() -> new Exception("Person不存在！id=" + publish.getPersonId())));
+            publish.setMessage(optMessage.orElseThrow(() -> new Exception("Message不存在！id=" + publish.getMessageId())));
             Publish p = publishRepository.save(publish);
             if (p == null) {
                 return JsonResult.createFail("Person发布失败！");
