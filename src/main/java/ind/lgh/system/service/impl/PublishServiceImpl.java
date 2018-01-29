@@ -51,11 +51,11 @@ public class PublishServiceImpl implements IPublishService {
             Assert.notNull(publish.getPersonId(), "用户信息不完整");
             Assert.notNull(publish.getMessageId(), "用户信息不完整");
             // 先取出完整的Person
-            Optional<Person> optPerson = personRepository.findById(publish.getPersonId());
-            Optional<Message> optMessage = messageRepository.findById(publish.getMessageId());
+            Person person = personRepository.findOne(publish.getPersonId());
+            Message message = messageRepository.findOne(publish.getMessageId());
             // 再建立关联
-            publish.setPerson(optPerson.orElseThrow(() -> new Exception("Person不存在！id=" + publish.getPersonId())));
-            publish.setMessage(optMessage.orElseThrow(() -> new Exception("Message不存在！id=" + publish.getMessageId())));
+            publish.setPerson(person);
+            publish.setMessage(message);
             Publish p = publishRepository.save(publish);
             if (p == null) {
                 return JsonResult.createFail("Person发布失败！");

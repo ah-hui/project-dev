@@ -24,7 +24,7 @@ public class Publish {
     @Transient
     private Long messageId;
 
-    @Id
+    @GraphId
     private Long id;
 
     @StartNode

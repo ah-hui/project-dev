@@ -42,11 +42,11 @@ public class FollowServiceImpl implements IFollowService {
             Assert.notNull(follow.getFollowerId(), "用户信息不完整");
             Assert.notNull(follow.getFollowedId(), "用户信息不完整");
             // 先取出完整的Person
-            Optional<Person> optPerson1 = personRepository.findById(follow.getFollowerId());
-            Optional<Person> optPerson2 = personRepository.findById(follow.getFollowedId());
+            Person person1 = personRepository.findOne(follow.getFollowerId());
+            Person person2 = personRepository.findOne(follow.getFollowedId());
             // 再建立关联
-            follow.setFollower(optPerson1.orElseThrow(() -> new Exception("Person不存在！id=" + follow.getFollowerId())));
-            follow.setFollowed(optPerson2.orElseThrow(() -> new Exception("Person不存在！id=" + follow.getFollowedId())));
+            follow.setFollower(person1);
+            follow.setFollowed(person2);
             Follow f = followRepository.save(follow);
             if (f == null) {
                 return JsonResult.createFail("Person关联失败！");

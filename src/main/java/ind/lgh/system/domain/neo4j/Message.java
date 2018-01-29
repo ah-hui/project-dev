@@ -3,7 +3,6 @@ package ind.lgh.system.domain.neo4j;
 import lombok.Getter;
 import lombok.Setter;
 import org.neo4j.ogm.annotation.GraphId;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 
@@ -18,7 +17,7 @@ import org.neo4j.ogm.annotation.Property;
 @Setter
 public class Message {
 
-    @Id
+    @GraphId
     private Long id;
 
     @Property(name = "content")

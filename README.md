@@ -23,3 +23,4 @@ REST接口
 - 模拟微博用户互粉、用户发布消息模型（实现两种实体两种关系）
 - 整理Neo4j依赖到最新，更换ogm为3.x版本，代码产生巨大变动
 - SpringFramework换用5.x版本
+- SpringFramework降级到4.x版本，Spring-data-neo4j降级到4.x版本，og降级到2.x版本

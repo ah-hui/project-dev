@@ -22,7 +22,7 @@ public class Follow {
     @Transient
     private Long followedId;
 
-    @Id
+    @GraphId
     private Long id;
 
     /**

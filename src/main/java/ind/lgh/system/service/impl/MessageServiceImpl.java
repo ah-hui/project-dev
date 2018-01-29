@@ -32,9 +32,9 @@ public class MessageServiceImpl implements IMessageService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
     public JsonResult get(@PathParam("id") Long id) {
-        Optional<Message> optMessage = messageRepository.findById(id);
+        Message message = messageRepository.findOne(id);
         JsonResult jr = JsonResult.createSuccess("查询Message成功！");
-        jr.addData(optMessage.orElse(null));
+        jr.addData(message);
         return jr;
     }
 

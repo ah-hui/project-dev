@@ -1,6 +1,10 @@
 package ind.lgh.system.config;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.jdbc.http.HttpDriver;
+import org.neo4j.ogm.drivers.bolt.driver.BoltDriver;
+import org.neo4j.ogm.service.Components;
+import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,16 +29,22 @@ public class Neo4jConfig {
         return new SessionFactory(boltConfiguration(), "ind.lgh.system.domain.neo4j");
     }
 
+    @Bean
+    public Neo4jTransactionManager transactionManager() throws Exception{
+        return new Neo4jTransactionManager(getSessionFactory());
+    }
+
     /**
      * Bolt连接
      * 究竟本质是什么鬼不知道，但是，bolt协议返回的数据多封装了数据库自带的属性，比http协议连接获得更多的数据
      */
     @Bean
     public org.neo4j.ogm.config.Configuration boltConfiguration() {
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration.Builder()
-                .uri("bolt://localhost")
-                .credentials("neo4j", "root")
-                .build();
+        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
+        config.driverConfiguration()
+                .setDriverClassName("org.neo4j.ogm.drivers.bolt.driver.BoltDriver")
+                .setURI("bolt://localhost")
+                .setCredentials("neo4j", "root");
         return config;
     }
 
@@ -43,10 +53,11 @@ public class Neo4jConfig {
      */
     @Bean
     public org.neo4j.ogm.config.Configuration httpConfiguration() {
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration.Builder()
-                .uri("http://localhost:7474")
-                .credentials("neo4j", "root")
-                .build();
+        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
+        config.driverConfiguration()
+                .setDriverClassName("org.neo4j.ogm.drivers.http.driver.HttpDriver")
+                .setURI("http://localhost:7474")
+                .setCredentials("neo4j", "root");
         return config;
     }
 
@@ -56,21 +67,11 @@ public class Neo4jConfig {
      */
     @Bean
     public org.neo4j.ogm.config.Configuration embeddedConfiguration() {
-        /**
-         * 使用外部配置文件方式：
-         * ConfigurationSource properties = new ClasspathConfigurationSource("ogm.properties");
-         * org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration.Builder(properties).build();
-         */
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration.Builder()
-                .uri("file:/D:/embedded-neo4j/graph.db")
-                .credentials("neo4j", "root")
-                .build();
+        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
+        config.driverConfiguration()
+                .setDriverClassName("org.neo4j.ogm.drivers.embedded.driver.EmbeddedDriver")
+                .setURI("file:/D:/embedded-neo4j/graph.db");
         return config;
-    }
-
-    @Bean
-    public Neo4jTransactionManager transactionManager() throws Exception {
-        return new Neo4jTransactionManager(getSessionFactory());
     }
 
     /**
@@ -78,7 +79,7 @@ public class Neo4jConfig {
      * http和bolt方式没有提供
      */
     @Bean
-    public GraphDatabaseService graphDatabaseService() {
+    public GraphDatabaseService graphDatabaseService(){
 //        EmbeddedDriver embeddedDriver = (EmbeddedDriver) Components.driver();
 //        return embeddedDriver.getGraphDatabaseService();
         return null;

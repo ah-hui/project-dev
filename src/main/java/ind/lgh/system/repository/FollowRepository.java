@@ -1,7 +1,7 @@
 package ind.lgh.system.repository;
 
 import ind.lgh.system.domain.neo4j.Follow;
-import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * @since 2018-01-25
  */
 @Repository
-public interface FollowRepository extends Neo4jRepository<Follow, Long> {
+public interface FollowRepository extends GraphRepository<Follow> {
 }

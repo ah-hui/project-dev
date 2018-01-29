@@ -20,7 +20,7 @@ public class Person {
     /**
      * 实体的标识符(只能使用Long类型)
      */
-    @Id
+    @GraphId
     @Setter
     private Long id;
 
