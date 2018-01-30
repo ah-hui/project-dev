@@ -64,9 +64,9 @@ public class PersonServiceImpl implements IPersonService {
         try {
             conn = DriverManager.getConnection("jdbc:neo4j:http://localhost:7474", "neo4j", "root");
             Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("MATCH (n) RETURN n");
+            ResultSet resultSet = statement.executeQuery("MATCH (n)-[r]-(g) RETURN n,r,g");
             while (resultSet.next()) {
-                System.out.println(resultSet.getString(1));
+                System.out.println(resultSet.getString("g"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,4 +74,9 @@ public class PersonServiceImpl implements IPersonService {
         }
         return JsonResult.createSuccess("Jdbc连接成功！");
     }
+
+    public static void main(String[] args) {
+        new PersonServiceImpl().testJdbc();
+    }
+
 }

@@ -24,3 +24,4 @@ REST接口
 - 整理Neo4j依赖到最新，更换ogm为3.x版本，代码产生巨大变动
 - SpringFramework换用5.x版本
 - SpringFramework降级到4.x版本，Spring-data-neo4j降级到4.x版本，og降级到2.x版本
+- 解决resteasy配置错误导致的启动要一年的错误
