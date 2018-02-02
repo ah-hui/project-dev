@@ -1,8 +1,10 @@
 package ind.lgh.system.config;
 
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.jdbc.http.HttpDriver;
 import org.neo4j.ogm.drivers.bolt.driver.BoltDriver;
+import org.neo4j.ogm.drivers.embedded.driver.EmbeddedDriver;
 import org.neo4j.ogm.service.Components;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.io.File;
 
 /**
  * Neo4j配置
@@ -30,7 +34,7 @@ public class Neo4jConfig {
     }
 
     @Bean
-    public Neo4jTransactionManager transactionManager() throws Exception{
+    public Neo4jTransactionManager transactionManager() throws Exception {
         return new Neo4jTransactionManager(getSessionFactory());
     }
 
@@ -59,29 +63,5 @@ public class Neo4jConfig {
                 .setURI("http://localhost:7474")
                 .setCredentials("neo4j", "root");
         return config;
-    }
-
-    /**
-     * 嵌入式连接
-     * 一般用作测试，不依赖外部Neo4j库，但停机数据丢失
-     */
-    @Bean
-    public org.neo4j.ogm.config.Configuration embeddedConfiguration() {
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
-        config.driverConfiguration()
-                .setDriverClassName("org.neo4j.ogm.drivers.embedded.driver.EmbeddedDriver")
-                .setURI("file:/D:/embedded-neo4j/graph.db");
-        return config;
-    }
-
-    /**
-     * 嵌入式库专用 - 取得交互句柄
-     * http和bolt方式没有提供
-     */
-    @Bean
-    public GraphDatabaseService graphDatabaseService(){
-//        EmbeddedDriver embeddedDriver = (EmbeddedDriver) Components.driver();
-//        return embeddedDriver.getGraphDatabaseService();
-        return null;
     }
 }
