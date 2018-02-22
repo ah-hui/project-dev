@@ -14,4 +14,12 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+    /**
+     * 自定义数据库访问方法示例
+     *
+     * @param phone
+     * @return
+     */
+    SysUser selectByPhone(String phone);
+
 }

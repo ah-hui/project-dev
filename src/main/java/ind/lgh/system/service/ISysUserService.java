@@ -23,4 +23,6 @@ public interface ISysUserService {
 
     JsonResult listByPage(Integer page, Integer rows);
 
+    JsonResult getByPhone(SysUser user);
+
 }

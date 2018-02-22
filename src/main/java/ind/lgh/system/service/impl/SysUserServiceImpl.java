@@ -82,6 +82,18 @@ public class SysUserServiceImpl implements ISysUserService {
         return jr;
     }
 
+    @Path("/getByPhone")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Override
+    public JsonResult getByPhone(SysUser user) {
+        SysUser u = userMapper.selectByPhone(user.getPhone());
+        JsonResult jr = JsonResult.createSuccess("查询用户成功！");
+        jr.addData(u);
+        return jr;
+    }
+
     @Path("/")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

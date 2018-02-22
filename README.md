@@ -11,6 +11,7 @@ Spring Boot的使用案例
 REST接口
 - 配置fastjson解析数据
 - ORM换用mybatis，添加tk-mybatis和pagehelper
+- 添加mybatis-generator
 - 添加lombok/druid
 - 切换日志记录为log4j，并在多环境配置下做不同配置
 - 添加AOP实现的web请求记录
