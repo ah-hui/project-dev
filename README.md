@@ -15,5 +15,8 @@ REST接口
 - 添加lombok/druid
 - 切换日志记录为log4j，并在多环境配置下做不同配置
 - 添加AOP实现的web请求记录
-
 - [集成resteasy](https://github.com/JesseyGone/project-dev/blob/T04/src/main/java/ind/lgh/system/service/impl/SysUserServiceImpl.java)
+
+# T06:
+自定义线程池
+- 已T04分支为基础，初始化本分支
