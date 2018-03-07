@@ -5,6 +5,8 @@ import com.alibaba.datax.my.client.job.content.Content;
 import com.alibaba.datax.my.client.reader.Reader;
 import com.alibaba.datax.my.client.reader.mysqlreader.MysqlReader;
 import com.alibaba.datax.my.client.reader.mysqlreader.MysqlReaderConnection;
+import com.alibaba.datax.my.client.reader.postgresqlreader.PostgresqlReader;
+import com.alibaba.datax.my.client.reader.postgresqlreader.PostgresqlReaderConnection;
 import com.alibaba.datax.my.client.service.DataxService;
 import com.alibaba.datax.my.client.writer.Writer;
 import com.alibaba.datax.my.client.writer.mysqlwriter.MysqlWriter;
@@ -90,6 +92,33 @@ public class DataxServiceImpl implements DataxService {
         String result = sendTask(task);
         System.out.println("#######################################");
         System.out.println("Client.mysqlToMysql is running!");
+        System.out.println("all: " + result);
+        System.out.println("#######################################");
+        return result;
+    }
+
+    @Override
+    public String postgresqlToMysql(Long taskId, String srcUsername, String srcPassword, String[] table, String[] srcJdbc, String targetUsername, String targetPassword, String targetJdbc) {
+        //
+        PostgresqlReaderConnection readerConn = new PostgresqlReaderConnection(table, srcJdbc);
+        MysqlWriterConnection writerConn = new MysqlWriterConnection(table, targetJdbc);
+        PostgresqlReader postgresqlReader = new PostgresqlReader(srcUsername, srcPassword, readerConn);
+        // 全部列
+        postgresqlReader.setColumn(new String[]{"*"});
+        MysqlWriter mysqlWriter = new MysqlWriter(targetUsername, targetPassword, writerConn);
+        mysqlWriter.setWriteMode("insert");
+        // 全部列
+        mysqlWriter.setColumn(new String[]{"*"});
+        Reader reader = new Reader("postgresqlreader", postgresqlReader);
+        Writer writer = new Writer("mysqlwriter", mysqlWriter);
+        Content content = new Content(reader, writer);
+        Job job = new Job(content);
+        Map<String, Job> map = new HashMap<>(8);
+        map.put("job", job);
+        DataxTask task = new DataxTask(taskId, map);
+        String result = sendTask(task);
+        System.out.println("#######################################");
+        System.out.println("Client.postgresqlToMysql is running!");
         System.out.println("all: " + result);
         System.out.println("#######################################");
         return result;

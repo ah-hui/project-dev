@@ -35,4 +35,28 @@ public class DataxController {
         }
         return null;
     }
+
+    @RequestMapping(value = "/postgresqlToMysql", method = RequestMethod.POST)
+    public String postgresqlToMysql() {
+        try {
+            // 1.取得源库和目的库的地址                 ip               port          db_name
+            String[] srcJdbc = {"jdbc:postgresql://" + "172.16.51.11" + ":" + "5433" + "/" + "vr-goods"};
+            String targetJdbc = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "vr-goods?useUnicode=true&characterEncoding=utf-8";
+            // 2.添加一条datax任务记录，将id返回给下一步
+            // 3.同步数据
+            dataxService.postgresqlToMysql(1L, "njread", "x653qasw#", new String[]{
+                    "dao_log"
+//                    ,
+//                    "goodsinfo_sjlh",
+//                    "pub_appgoods_classset",
+//                    "pub_appgoods_goodsset",
+//                    "pub_barcode"
+            }, srcJdbc, "root", "root", targetJdbc);
+            // 4.更新id=id的datax任务记录，记录立即返回的结果
+            // 5.这么严重的操作-要有操作记录表对应
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
