@@ -21,3 +21,7 @@ REST接口
 自定义线程池
 - 以T04分支为基础，初始化本分支
 - 创建自定义线程池
+
+# T07:
+十大数据挖掘算法，搞起，[参考](https://www.cnblogs.com/en-heng/p/5719101.html)
+- Apriori算法
