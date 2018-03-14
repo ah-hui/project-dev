@@ -55,3 +55,4 @@ Spring Boot的使用案例
 }
 ```
 - 实现服务端和客户端一组服务，调试成功，使用datax从db1到db2抽取转换保存
+- 添加postgresql的reader和hdfs的writer
