@@ -61,6 +61,7 @@ public class Apriori {
     /**
      * 置信度阈值
      * 置信度：confidence(A=>B)=P(B|A)
+     * 置信度可理解为条件概率p(Y|X)，度量在已知事务中包含了X时包含Y的概率
      * 物品A->B的置信度=物品{A,B}的支持度 / 物品{A}的支持度
      */
     private static final double MIN_CONFIDENCE = 0.7;
@@ -85,6 +86,10 @@ public class Apriori {
         dataList.add("2;3;");
         dataList.add("1;2;4;");
         dataList.add("1;3;");
+        dataList.add("2;3;");
+        dataList.add("1;3;");
+        dataList.add("1;2;3;5;");
+        dataList.add("1;2;3;");
         dataList.add("2;3;");
         dataList.add("1;3;");
         dataList.add("1;2;3;5;");
@@ -181,9 +186,11 @@ public class Apriori {
             List<String> subset = subset(key);
             // 对每个频繁项集求取其非空真子集，遍历
             for (String item : subset) {
-                // 频繁项集的非空真子集的支持度
+                // 如果该频繁项集的非空真子集，也是频繁项集
                 Integer count = frequentItemset.get(item);
                 if (count != null) {
+                    // 置信度CONF = 频繁项集S1的支持数SUP1 / S1的频繁真子集S2的支持数SUP2
+                    // 刻画的是 S2->(S1-S2)的置信度 = SUP(S1)/SUP(S2)
                     Double confidence = (1.0 * frequentItemset.get(key)) / (1.0 * frequentItemset.get(item));
                     if (confidence > MIN_CONFIDENCE) {
                         relations.put(item + ASSOCIATION_RULE_ARROW + expect(key, item), confidence);
@@ -315,10 +322,11 @@ public class Apriori {
     }
 
     /**
-     * 集合运算 - A|B.
+     * 集合运算 - A-B.
+     * 从集合A中去除集合B中含有的元素
      *
-     * @param stringA
-     * @param stringB
+     * @param stringA 集合A
+     * @param stringB 集合B
      * @return
      */
     private static String expect(String stringA, String stringB) {
