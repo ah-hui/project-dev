@@ -1,5 +1,6 @@
 package ind.lgh.system.algorithm;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -69,7 +70,7 @@ public class Apriori {
     /**
      * 项之间的分隔符
      */
-    private static final String ITEM_SPLIT = ";";
+    private static final String ITEM_SPLIT = "_";
 
     /**
      * 关联规则表示符号
@@ -79,22 +80,15 @@ public class Apriori {
     private static final int INTEGER_2 = 2;
 
     public static void main(String[] args) {
-        // TODO: 原始数据要经排序，且不能有空元素，即";;"
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("1;2;5;");
-        dataList.add("2;4;");
-        dataList.add("2;3;");
-        dataList.add("1;2;4;");
-        dataList.add("1;3;");
-        dataList.add("2;3;");
-        dataList.add("1;3;");
-        dataList.add("1;2;3;5;");
-        dataList.add("1;2;3;");
-        dataList.add("2;3;");
-        dataList.add("1;3;");
-        dataList.add("1;2;3;5;");
-        dataList.add("1;2;3;");
 
+        long startTime = System.currentTimeMillis();
+
+        String rootPath = System.getProperty("user.dir");
+
+        List<String> dataList = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\apriori_demo.csv");
+
+        List<String> excludeList = new ArrayList<>();
+        Collections.addAll(excludeList, new String[]{null, ""});
         System.out.println("======数据集合=========");
         for (String string : dataList) {
             System.out.println(string);
@@ -113,6 +107,49 @@ public class Apriori {
         for (String rule : ruleSet) {
             System.out.println(rule + ":" + relationRules.get(rule));
         }
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("共计耗时：" + (endTime - startTime) / 1000);
+
+    }
+
+    /**
+     * 读取数据文件，转换为可处理的格式.
+     *
+     * @param filePath 文件路径
+     * @return 原始数据集
+     */
+    private static List<String> readDataFile(String filePath) {
+        File file = new File(filePath);
+        List<String> dataList = new ArrayList<>();
+        List<String> excludeList = new ArrayList<>();
+        Collections.addAll(excludeList, new String[]{null, ""});
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            String str;
+            List<String> list = new ArrayList<>();
+            while ((str = in.readLine()) != null) {
+                Collections.addAll(list, str.split(ITEM_SPLIT));
+                // 数据清洗
+                list.removeAll(excludeList);
+                // 排序 - 字典序
+                list.sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+                dataList.add(String.join(ITEM_SPLIT, list));
+                list.clear();
+            }
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dataList;
     }
 
     /**
@@ -133,7 +170,9 @@ public class Apriori {
         itemset.putAll(generateFrequentOneItemset(sortedDataList));
         frequentItemset.putAll(itemset);
         // 以itemset作为循环核心，每次由频繁k-1项集生成频繁k项集，都写入到itemset
+        int ii = 1;
         while (itemset != null && itemset.size() > 0) {
+            System.out.println("递归次数: " + (ii++));
             // 生成候选集，并做支持度计数
             Map<String, Integer> candidateItemset = generateFrequentItemset(itemset);
             Set<String> candidateKeySet = candidateItemset.keySet();
@@ -142,6 +181,7 @@ public class Apriori {
                 List<String> dataItems = Arrays.asList(data.split(ITEM_SPLIT));
                 // 遍历候选k项集，检查每个k项集
                 for (String candidate : candidateKeySet) {
+//                    System.out.println("检查每个候选k项集: " + candidate);
                     boolean flag = true;
                     // 检查每个k项集的每个项，如果存在原数据记录是该k项集的超集，则对该k项集支持度计数加1
                     List<String> candidateItems = Arrays.asList(candidate.split(ITEM_SPLIT));
@@ -220,6 +260,7 @@ public class Apriori {
                 }
             }
         }
+        System.out.println("频繁一项集生成完毕！共计" + itemset.size());
         return itemset;
     }
 
