@@ -57,7 +57,7 @@ public class Apriori {
      * 设W中有s％的事务同时支持物品集A和B，s％称为{A，B}的支持度
      * num(A∪B)表示含有物品集{A,B}的事务集的个数，不是数学中的并集
      */
-    private static final int MIN_SUPPORT = 2;
+    private static final int MIN_SUPPORT = 10;
 
     /**
      * 置信度阈值
@@ -85,7 +85,7 @@ public class Apriori {
 
         String rootPath = System.getProperty("user.dir");
 
-        List<String> dataList = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\apriori_demo.csv");
+        List<String> dataList = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\apriori_test.csv");
 
         List<String> excludeList = new ArrayList<>();
         Collections.addAll(excludeList, new String[]{null, ""});
@@ -170,22 +170,27 @@ public class Apriori {
         itemset.putAll(generateFrequentOneItemset(sortedDataList));
         frequentItemset.putAll(itemset);
         // 以itemset作为循环核心，每次由频繁k-1项集生成频繁k项集，都写入到itemset
-        int ii = 1;
+        int ii = 0;
         while (itemset != null && itemset.size() > 0) {
-            System.out.println("递归次数: " + (ii++));
+            ii++;
+            System.out.println("递归次数: " + ii + ", sortedDataList大小：" + sortedDataList.size());
             // 生成候选集，并做支持度计数
             Map<String, Integer> candidateItemset = generateFrequentItemset(itemset);
             Set<String> candidateKeySet = candidateItemset.keySet();
+            System.out.println("候选集生成完毕");
             // 遍历原数据集
             for (String data : sortedDataList) {
                 List<String> dataItems = Arrays.asList(data.split(ITEM_SPLIT));
                 // 遍历候选k项集，检查每个k项集
                 for (String candidate : candidateKeySet) {
-//                    System.out.println("检查每个候选k项集: " + candidate);
                     boolean flag = true;
                     // 检查每个k项集的每个项，如果存在原数据记录是该k项集的超集，则对该k项集支持度计数加1
                     List<String> candidateItems = Arrays.asList(candidate.split(ITEM_SPLIT));
                     for (String str : candidateItems) {
+//                        if (data.indexOf(str) == -1) {
+//                            flag = false;
+//                            break;
+//                        }
                         if (!dataItems.contains(str)) {
                             flag = false;
                             break;
@@ -196,6 +201,7 @@ public class Apriori {
                     }
                 }
             }
+            System.out.println("已经生成候选集，并做支持度计数 ");
             // 从候选集中找到满足最小支持度阈值的频繁项集
             itemset.clear();
             for (String candidate : candidateKeySet) {
@@ -232,7 +238,7 @@ public class Apriori {
                     // 置信度CONF = 频繁项集S1的支持数SUP1 / S1的频繁真子集S2的支持数SUP2
                     // 刻画的是 S2->(S1-S2)的置信度 = SUP(S1)/SUP(S2)
                     Double confidence = (1.0 * frequentItemset.get(key)) / (1.0 * frequentItemset.get(item));
-                    if (confidence > MIN_CONFIDENCE) {
+                    if (confidence >= MIN_CONFIDENCE) {
                         relations.put(item + ASSOCIATION_RULE_ARROW + expect(key, item), confidence);
                     }
                 }
@@ -260,8 +266,15 @@ public class Apriori {
                 }
             }
         }
-        System.out.println("频繁一项集生成完毕！共计" + itemset.size());
-        return itemset;
+        Map<String, Integer> itemset2 = new HashMap<>();
+        Set<String> keySet = itemset.keySet();
+        for (String key : keySet) {
+            if (itemset.get(key) >= MIN_SUPPORT) {
+                itemset2.put(key, itemset.get(key));
+            }
+        }
+        System.out.println("频繁一项集生成完毕！共计" + itemset2.size());
+        return itemset2;
     }
 
     /**
