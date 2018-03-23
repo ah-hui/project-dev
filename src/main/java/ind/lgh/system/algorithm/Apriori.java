@@ -85,7 +85,7 @@ public class Apriori {
 
         String rootPath = System.getProperty("user.dir");
 
-        List<String> dataList = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\apriori_test.csv");
+        List<String> dataList = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\apriori_demo.csv");
 
         List<String> excludeList = new ArrayList<>();
         Collections.addAll(excludeList, new String[]{null, ""});
