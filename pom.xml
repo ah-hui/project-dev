@@ -140,6 +140,14 @@
             </exclusions>
         </dependency>
 
+        <!-- spark-mllib -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.11</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+
         <!-- 手动添加依赖   end -->
     </dependencies>
 
