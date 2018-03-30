@@ -1,5 +1,8 @@
 package ind.lgh.system.algorithm;
 
+import lombok.Getter;
+
+import java.io.*;
 import java.util.*;
 
 /**
@@ -19,7 +22,7 @@ public class Kmeans {
     /**
      * 聚类的数目
      */
-    private int k = 3;
+    private int k;
     /**
      * 原始数据集
      */
@@ -51,15 +54,52 @@ public class Kmeans {
     /**
      * 聚类
      */
+    @Getter
     private List<ArrayList<Integer>> clusters;
     /**
-     * 每次迭代的SSE列表，其size刚好等于迭代的次数
+     * 每次迭代样本数据的SSE列表，其size刚好等于迭代的次数
      */
     private List<Float> sseList;
+    /**
+     * 每次迭代每个聚类的SSE列表，其size刚好等于迭代的次数
+     */
+    @Getter
+    private List<float[]> clusterSseList;
     /**
      * 最小的k取值
      */
     private static final Integer MIN_K = 2;
+
+    /**
+     * 读取数据文件，转换为可处理的格式.
+     *
+     * @param filePath 文件路径
+     * @return 原始数据集
+     */
+    private static float[][] readDataFile(String filePath) {
+        File file = new File(filePath);
+        float[][] dataSet = new float[150][4];
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            String str;
+            int m = -1;
+            while ((str = in.readLine()) != null) {
+                m++;
+                String[] split = str.split(",");
+                float[] arr = new float[4];
+                for (int i = 0; i < split.length; i++) {
+                    arr[i] = Float.parseFloat(split[i]);
+                }
+                dataSet[m] = arr;
+            }
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dataSet;
+    }
 
     /**
      * 主函数入口
@@ -76,30 +116,30 @@ public class Kmeans {
         long startTime = System.currentTimeMillis();
         Kmeans kmeans = new Kmeans();
         // 初始化数据
-        float[][] dataSet = new float[][]{{8, 2}, {3, 4}, {2, 5},
-                {4, 2}, {7, 3}, {6, 2}, {4, 7}, {6, 3}, {5, 3},
-                {6, 3}, {6, 9}, {1, 6}, {3, 9}, {4, 1}, {8, 6}};
+//        float[][] dataSet = new float[][]{{8, 2}, {3, 4}, {2, 5},
+//                {4, 2}, {7, 3}, {6, 2}, {4, 7}, {6, 3}, {5, 3},
+//                {6, 3}, {6, 9}, {1, 6}, {3, 9}, {4, 1}, {8, 6}};
+        String rootPath = System.getProperty("user.dir");
+        float[][] dataSet = readDataFile(rootPath + "\\src\\main\\java\\ind\\lgh\\system\\algorithm\\data\\kmeans_test.csv");
         kmeans.initData(5, dataSet);
         // 聚类过程
 
         float sumTimes = 0;
         float sumSse = 0;
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 1000000; i++) {
             kmeans.kmeans();
             List<Float> sseList = kmeans.sseList;
             sumTimes += sseList.size();
             sumSse += sseList.get(sseList.size() - 1);
             kmeans.initData(5, dataSet);
         }
-        System.out.println("Times avg=" + (sumTimes / 10000000) + ", SSE avg=" + (sumSse / 10000000));
+        System.out.println("Times avg=" + (sumTimes / 1000000) + ", SSE avg=" + (sumSse / 1000000));
 
 //        kmeans.kmeans();
         // 输出结果
 //        kmeans.printConsole();
         long endTime = System.currentTimeMillis();
         System.out.println("Total Time:" + (endTime - startTime) / 1000 + "s");
-        System.out.println("Memory Consuming:" + (float) (Runtime.getRuntime().totalMemory() -
-                Runtime.getRuntime().freeMemory()) / 1000000 + "MB");
     }
 
     /**
@@ -108,7 +148,7 @@ public class Kmeans {
      * @param k       聚类数
      * @param dataSet 样本数据集
      */
-    private void initData(int k, float[][] dataSet) throws Exception {
+    public void initData(int k, float[][] dataSet) throws Exception {
         if (k < MIN_K) {
             throw new Exception("错误！请输入有效的k值！");
         }
@@ -127,6 +167,8 @@ public class Kmeans {
         noises = new ArrayList<>();
         // SSE列表
         sseList = new ArrayList<>();
+        // cluster SSE列表
+        clusterSseList = new ArrayList<float[]>();
         // 原始数据集
         observations = new float[rows][dimensions];
         for (int i = 0; i < dataSet.length; i++) {
@@ -278,7 +320,7 @@ public class Kmeans {
         // 注意去重
         outer:
         for (; ; ) {
-            int randomInt = r.nextInt((int) sumDistance);
+            int randomInt = r.nextInt((int) Math.ceil(sumDistance));
             inner:
             for (int i = 0; ; i++) {
                 randomInt -= pointToClusterDistance[i];
@@ -401,6 +443,29 @@ public class Kmeans {
      * 同时也可以衡量不同聚类结果好坏的指标
      */
     private void calcSSE() {
+        // 对全部样本数据sum
+        float sumSSE = 0;
+        // 本次迭代，每(k)个聚类的SSE
+        float[] clusterSSE = new float[k];
+        for (int i = 0; i < clusters.size(); i++) {
+            // 对每个聚类sum
+            float clusterSumSSE = 0;
+            ArrayList<Integer> cluster = clusters.get(i);
+            for (int j = 0; j < cluster.size(); j++) {
+                float squaredError = calcSquaredError(observations[cluster.get(j)], centroids[i]);
+                sumSSE += squaredError;
+                clusterSumSSE += squaredError;
+            }
+            clusterSSE[i] = clusterSumSSE;
+        }
+        sseList.add(sumSSE);
+        clusterSseList.add(clusterSSE);
+    }
+
+    /**
+     * 保存每个聚类的平方误差和
+     */
+    private void keepSSE() {
         float sse = 0;
         for (int i = 0; i < clusters.size(); i++) {
             ArrayList<Integer> cluster = clusters.get(i);
