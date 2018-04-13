@@ -26,3 +26,4 @@ REST接口
 十大数据挖掘算法，搞起，[参考](https://www.cnblogs.com/en-heng/p/5719101.html)
 - Apriori算法
 - K-means算法，已整合k-means++，基于k-means实现二分k-means算法
+- 整合Spark，Java连接Spark提交任务，计划使用Spark MLlib
