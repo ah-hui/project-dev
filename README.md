@@ -17,3 +17,8 @@ REST接口
 - 添加AOP实现的web请求记录
 
 - [集成resteasy](https://github.com/JesseyGone/project-dev/blob/T04/src/main/java/ind/lgh/system/service/impl/SysUserServiceImpl.java)
+- 搞懂mybatis-generator的全部配置，无敌，牛逼
+    1.配置中的plugin可以指定使用默认generator插件还是tk-mybatis提供的插件
+    2.pom文件中的插件配置的dependency中的mybatis版本会严重影响xml生成内容，
+        举个栗子，使用纯净mybatis版本包含insertSelective，但是mybatis-starter就不包含
+  
