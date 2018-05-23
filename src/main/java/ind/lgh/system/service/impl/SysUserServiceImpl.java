@@ -141,6 +141,12 @@ public class SysUserServiceImpl implements ISysUserService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Override
     public JsonResult listByPage(@QueryParam("page") Integer page, @QueryParam("rows") Integer rows) {
+//        public JsonResult listByPage(SysUser user) {
+        // 确保分页
+//        Integer page = user.getPage();
+//        Integer rows = user.getRows();
+//        user.setPage(null == page ? 1 : page);
+//        user.setRows(null == rows ? 10 : rows);
         page = null == page ? 1 : page;
         rows = null == rows ? 10 : rows;
         // 分页实现原理

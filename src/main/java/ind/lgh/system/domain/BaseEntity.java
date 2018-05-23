@@ -1,6 +1,7 @@
 package ind.lgh.system.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,20 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -1L;
+
+    /**
+     * 分页参数：起始页
+     */
+    @Transient
+    @JsonIgnore
+    private Integer page;
+
+    /**
+     * 分页参数：行数
+     */
+    @Transient
+    @JsonIgnore
+    private Integer rows;
 
     @Id
     @Column(name = "Id")
