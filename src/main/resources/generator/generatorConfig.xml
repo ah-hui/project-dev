@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
     <!--导入属性配置-->
     <properties resource="generator/mapperPlugin.properties"/>
 
-    <context id="default">
-        <!--targetRuntime="MyBatis3" defaultModelType="flat"-->
+    <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
+
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
         <!--指定使用什么mappingPlugin，默认是mybatis的，以下配置使用的是tk-mybatis的-->
         <!--<plugin type="${mapper.plugin}">-->
-            <!--<property name="mappers" value="${mapper.Mapper}"/>-->
+        <!--<property name="mappers" value="${mapper.Mapper}"/>-->
         <!--</plugin>-->
 
         <!-- optional，旨在创建class时，对注释进行控制 -->
@@ -41,12 +42,14 @@
 
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
-            <!-- 是否对model添加 构造函数 -->
-            <property name="constructorBased" value="true"/>
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
             <property name="trimStrings" value="true"/>
+
+            <!-- 下面两个配置将产生构造器实现的mapper.xml，而不是result的 -->
+            <!-- 是否对model添加 构造函数 -->
+            <!--<property name="constructorBased" value="true"/>-->
             <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
-            <property name="immutable" value="false"/>
+            <!--<property name="immutable" value="false"/>-->
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
@@ -67,20 +70,22 @@
 
         <!-- 使用SQL通配符%来匹配所有表 -->
         <!--<table tableName="%" >-->
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
 
-        <!--<table tableName="dw_metric_mapping" domainObjectName="DwMetricMapping"-->
-               <!--enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false">-->
-        <!--</table>-->
+        <table tableName="dw_metric_mapping" domainObjectName="DwMetricMapping"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
 
-        <table schema="" tableName="dw_metric_mapping" domainObjectName="DwMetricMapping" enableCountByExample="false"
+        <table schema="" tableName="dw_dimension_mapping" domainObjectName="DwDimensionMapping"
+               enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"></table>
 
-        <table schema="" tableName="dw_dimension_mapping" domainObjectName="DwDimensionMapping" enableCountByExample="false"
+        <table schema="" tableName="dw_sub_dimension_mapping" domainObjectName="DwSubDimensionMapping"
+               enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"></table>
 
