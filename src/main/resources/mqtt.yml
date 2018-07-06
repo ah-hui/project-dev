@@ -1,0 +1,11 @@
+#=====================mqtt===============================
+com:
+  mqtt:
+    host: tcp://xpomg.weilian.cn:61613
+    # 接入端唯一标志
+    clientid: suneee
+    topic: usertopic
+    username: admin
+    password: password
+    timeout: 10
+    keepalive: 20

@@ -27,3 +27,6 @@ REST接口
 - Apriori算法
 - K-means算法，已整合k-means++，基于k-means实现二分k-means算法
 - 整合Spark，Java连接Spark提交任务，计划使用Spark MLlib
+
+- 跑偏了，加入了mqtt相关
+- 又跑偏了，测试了下可重入读写锁ReentrantReadWriteLock
