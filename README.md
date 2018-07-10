@@ -33,8 +33,15 @@ REST接口
 - 继续跑偏，编写OpenOffice转换工具类，使用三种方式实现并发下的转换实现
 - Maven多环境配置的两种实现：
     ```第一种：Properties属性```
+    
     ```使用-D指定：mvn clean package -Denv=dev```
+    
     ```自动应用，且覆盖pom已有属性```
+    
     ```第二种：Profiles配置文件```
+    
     ```使用-P指定：mvn clean package -Ptest```
+    
     ```配置文件通过@profileActive@访问并应用配置```
+    
+    
