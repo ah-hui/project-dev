@@ -295,6 +295,7 @@
                 <version>3.1.1</version>
                 <configuration>
                     <!-- put your configurations here -->
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
                 <executions>
                     <execution>
