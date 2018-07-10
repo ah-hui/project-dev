@@ -195,6 +195,39 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.artofsolving.jodconverter/jodconverter-core -->
+        <dependency>
+            <groupId>org.artofsolving.jodconverter</groupId>
+            <artifactId>jodconverter-core</artifactId>
+            <version>3.0-beta-4</version>
+            <!--使用Maven导入不成功，这个库是手动导入的-->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openoffice/unoil -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>unoil</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openoffice/juh -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>juh</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openoffice/jurt -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>jurt</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openoffice/ridl -->
+        <dependency>
+            <groupId>org.openoffice</groupId>
+            <artifactId>ridl</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+
         <!-- 手动添加依赖   end -->
     </dependencies>
 
