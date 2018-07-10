@@ -1,0 +1,5 @@
+office.convert:
+  #home: C:\Program Files (x86)\OpenOffice 4
+  home: /opt/openoffice4
+  port: 8100
+  host: 10.6.251.12

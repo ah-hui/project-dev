@@ -23,6 +23,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <mysql.version>5.1.45</mysql.version>
+        <!-- For multi env config<default> -->
+        <env>dev</env>
     </properties>
 
     <dependencies>
@@ -231,7 +233,55 @@
         <!-- 手动添加依赖   end -->
     </dependencies>
 
+    <!-- 多环境配置第二种实现： -P指定参数（与profile-id对应），配置文件通过@profileActive@访问 -->
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <profileActive>local</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profileActive>test</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
+        <finalName>${project.artifactId}</finalName>
+        <!-- 多环境配置第一种实现： -D指定参数，自动覆盖应用 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/env/${env}</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
