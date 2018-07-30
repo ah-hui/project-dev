@@ -3,6 +3,7 @@ package ind.lgh.system.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.PageInterceptor;
+import ind.lgh.system.domain.DpPreprocessingFunctionList;
 import ind.lgh.system.domain.JsonResult;
 import ind.lgh.system.domain.SysUser;
 import ind.lgh.system.mapper.SysUserMapper;
@@ -57,6 +58,22 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Autowired
     private SysUserMapper userMapper;
+
+    @Autowired
+    private DpPreprocessingFunctionList dpPreprocessingFunctionList;
+
+    /**
+     * 这个接口现在不通，因为程序找不到application.yml
+     */
+    @Path("/ymlRead")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public JsonResult ymlRead() {
+        JsonResult jr = JsonResult.createSuccess("查询用户成功！");
+        jr.addData(dpPreprocessingFunctionList);
+        return jr;
+    }
 
     @Path("/")
     @GET

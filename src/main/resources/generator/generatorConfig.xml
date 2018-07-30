@@ -27,7 +27,7 @@
         <javaClientGenerator targetPackage="${target.package.java.mapper}" targetProject="${target.project.java.mapper}" type="XMLMAPPER" />
 
         <!-- 使用SQL通配符%来匹配所有表 -->
-        <table tableName="%" >
+        <table tableName="dp_%" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

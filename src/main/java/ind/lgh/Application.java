@@ -3,13 +3,18 @@ package ind.lgh;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import ind.lgh.system.pool.CustomThreadPoolExecutor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Spring主程序.
@@ -20,6 +25,17 @@ import java.util.List;
 @SpringBootApplication
 @MapperScan(basePackages = "ind.lgh.system.mapper")
 public class Application extends WebMvcConfigurerAdapter {
+
+    @Bean("listeningExecutorService")
+    public ListeningExecutorService getListeningExecutorService() {
+        // 自定义线程池
+        CustomThreadPoolExecutor exec = new CustomThreadPoolExecutor();
+        exec.init();
+        ExecutorService pool = exec.getCustomThreadPoolExecutor();
+        // ListeningExecutorService
+        ListeningExecutorService service = MoreExecutors.listeningDecorator(pool);
+        return service;
+    }
 
     /**
      * fast-json解析数据
