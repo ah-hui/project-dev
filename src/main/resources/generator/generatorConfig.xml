@@ -73,21 +73,102 @@
         <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="dw_metric_mapping" domainObjectName="DwMetricMapping"
+        <table tableName="b_mi_diagnosis" domainObjectName="Diagnosis"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="" tableName="dw_dimension_mapping" domainObjectName="DwDimensionMapping"
-               enableCountByExample="false"
+        <table tableName="b_mi_doctor" domainObjectName="Doctor"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               selectByExampleQueryId="false">
+        </table>
 
-        <table schema="" tableName="dw_sub_dimension_mapping" domainObjectName="DwSubDimensionMapping"
-               enableCountByExample="false"
+        <table tableName="b_mi_hospital" domainObjectName="Hospital"
+               enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_inspection_equipment" domainObjectName="InspectionEquipment"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_medical_image" domainObjectName="MedicalImage"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_medical_information" domainObjectName="MedicalInformation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_patient" domainObjectName="Patient"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_section" domainObjectName="Section"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="b_mi_treatment_record" domainObjectName="TreatmentRecord"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_checking_type" domainObjectName="CheckingType"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_diagnosis_classification" domainObjectName="DiagnosisClassification"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_medical_status" domainObjectName="MedicalStatus"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_organ" domainObjectName="Organ"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_pathology" domainObjectName="Pathology"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_subject" domainObjectName="Subject"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+        <table tableName="d_mi_treatment_classification" domainObjectName="TreatmentClassification"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
 
     </context>
 </generatorConfiguration>
